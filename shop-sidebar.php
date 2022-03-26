@@ -94,14 +94,9 @@
                                                 <span class="mm-text">Pages</span>
                                             </a>
                                         </li>
-                                        <li class="mainmenu__item menu-item-has-children has-children">
-                                            <a href="#" class="mainmenu__link">
-                                                <span class="mm-text">Blog</span>
-                                            </a>
-                                        </li>
                                         <li class="mainmenu__item">
-                                            <a href="#" class="mainmenu__link">
-                                                <span class="mm-text">New Look</span>
+                                            <a href="login-register.php" class="mainmenu__link">
+                                                <span class="mm-text">login-register</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -231,23 +226,18 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="">
+                                            <a href="#">
                                                 Collections
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="">
+                                            <a href="#">
                                                 Pages
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="">
-                                                Blog
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                New Look
+                                        <li class="mainmenu__item">
+                                            <a href="login-register.php" class="mainmenu__link">
+                                                <span class="mm-text">login-register</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -270,7 +260,7 @@
                         <ul class="breadcrumb">
                             <li><a href="index-07.php">Home</a></li>
                             <li><a href="shop-sidebar.php">Shop Pages</a></li>
-                            <li class="current"><span>Product Details</span></li>
+                            <li class="current"><span>Product</span></li>
                         </ul>
                     </div>
                 </div>

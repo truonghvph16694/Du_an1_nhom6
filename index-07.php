@@ -210,7 +210,7 @@
                                     <nav class="main-navigation">
                                         <ul class="mainmenu mainmenu--2 mainmenu--centered">
                                             <li class="mainmenu__item menu-item-has-children megamenu-holder">
-                                                <a href="index-2.php" class="mainmenu__link">
+                                                <a href="index-07.php" class="mainmenu__link">
                                                     <span class="mm-text">Home</span>
                                                 </a>
                                             </li>
@@ -221,18 +221,18 @@
                                                 </a>
                                             </li>
                                             <li class="mainmenu__item">
-                                                <a href="" class="mainmenu__link">
+                                                <a href="#" class="mainmenu__link">
                                                     <span class="mm-text">Collections</span>
                                                 </a>
                                             </li>
                                             <li class="mainmenu__item menu-item-has-children has-children">
-                                                <a href="" class="mainmenu__link">
+                                                <a href="#" class="mainmenu__link">
                                                     <span class="mm-text">Pages</span>
                                                 </a>
                                             </li>
                                             <li class="mainmenu__item">
-                                                <a href="" class="mainmenu__link">
-                                                    <span class="mm-text">New Look</span>
+                                                <a href="login-register.php" class="mainmenu__link">
+                                                    <span class="mm-text">login-register</span>
                                                 </a>
                                             </li>
                                         </ul>
@@ -343,12 +343,7 @@
 
         <!-- Main Content Wrapper Start -->
         <div id="content" class="main-content-wrapper">
-            <div class="homepage-slider" id="homepage-slider-1">
-                <div id="rev_slider_4_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container" data-alias="home-07" data-source="gallery" style="margin:0px auto;background:transparent;padding:0px;margin-top:0px;margin-bottom:0px;">
-                    <!-- START REVOLUTION SLIDER 5.4.7 fullwidth mode -->
-                    <div id="rev_slider_4_1" class="rev_slider fullwidthabanner" style="display:none;" data-version="5.4.7">
-                    <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div> </div>
-                </div><!-- END REVOLUTION SLIDER -->
+                <img src="assets/img/slider/home-07/m7-s1-1.jpg" alt="">
             </div>
 
             <!-- Banner Area Start Here -->
@@ -456,7 +451,7 @@
                 <div class="container-fluid">
                     <div class="row mb--40 mb-md--30">
                         <div class="col-12 text-center">
-                            <h2 class="heading-secondary">Must Have</h2>
+                            <h2 class="heading-secondary">New Products</h2>
                             <hr class="separator center mt--25 mt-md--15">
                         </div>
                     </div>

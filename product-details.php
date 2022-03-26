@@ -1,5 +1,6 @@
 <?php
 require_once 'db.php';
+// lấy sản phẩm cùng danh mục
 if (isset($_GET['iddanh'])) {
     $iddanh = $_GET['iddanh'];
     $sql_new = "SELECT * FROM `products` WHERE cate_id = $iddanh LIMIT 4 " ;
@@ -107,14 +108,9 @@ if (isset($_GET['iddetail'])) {
                                                 <span class="mm-text">Pages</span>
                                             </a>
                                         </li>
-                                        <li class="mainmenu__item menu-item-has-children has-children">
-                                            <a href="#" class="mainmenu__link">
-                                                <span class="mm-text">Blog</span>
-                                            </a>
-                                        </li>
                                         <li class="mainmenu__item">
-                                            <a href="#" class="mainmenu__link">
-                                                <span class="mm-text">New Look</span>
+                                            <a href="login-register.php" class="mainmenu__link">
+                                                <span class="mm-text">login-register</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -244,23 +240,18 @@ if (isset($_GET['iddetail'])) {
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="">
+                                            <a href="#">
                                                 Collections
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="">
+                                            <a href="#">
                                                 Pages
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="">
-                                                Blog
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                New Look
+                                        <li class="mainmenu__item">
+                                            <a href="login-register.php" class="mainmenu__link">
+                                                <span class="mm-text">login-register</span>
                                             </a>
                                         </li>
                                     </ul>
