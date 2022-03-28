@@ -16,7 +16,10 @@ if (isset($_GET['iddetail'])) {
  $sqldetail = "SELECT * FROM products WHERE pro_id = $idchitiet";
  $kqdetail = $conn->query($sqldetail);
 }
+
+ 
 ?>
+
 
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -461,15 +464,7 @@ if (isset($_GET['iddetail'])) {
                                                         <img src="assets/img/others/comment-icon-2.png"
                                                             alt="Review Avatar" class="review__avatar">
                                                         <div class="review__text">
-                                                            <div class="product-rating float-right">
-                                                                <span>
-                                                                    <i class="dl-icon-star rated"></i>
-                                                                    <i class="dl-icon-star rated"></i>
-                                                                    <i class="dl-icon-star rated"></i>
-                                                                    <i class="dl-icon-star rated"></i>
-                                                                    <i class="dl-icon-star rated"></i>
-                                                                </span>
-                                                            </div>
+                                                            
                                                             <div class="review__meta">
                                                                 <strong class="review__author">John Snow </strong>
                                                                 <span class="review__dash">-</span>
@@ -488,37 +483,10 @@ if (isset($_GET['iddetail'])) {
                                             <div class="review-form-wrapper">
                                                 <span class="reply-title"><strong>Add a review</strong></span>
                                                 <form action="#" class="form">
-                                                    <div class="form-notes mb--20">
-                                                        <p>Your email address will not be published. Required fields are
-                                                            marked <span class="required">*</span></p>
-                                                    </div>
-                                                    <div class="form__group mb--30 mb-sm--20">
-                                                        <div class="revew__rating">
-                                                            <p class="stars selected">
-                                                                <a class="star-1 active" href="#">1</a>
-                                                                <a class="star-2" href="#">2</a>
-                                                                <a class="star-3" href="#">3</a>
-                                                                <a class="star-4" href="#">4</a>
-                                                                <a class="star-5" href="#">5</a>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form__group mb--30 mb-sm--20">
-                                                        <div class="row">
-                                                            <div class="col-sm-6 mb-sm--20">
-                                                                <label class="form__label" for="name">Name<span
-                                                                        class="required">*</span></label>
-                                                                <input type="text" name="name" id="name"
-                                                                    class="form__input">
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <label class="form__label" for="email">email<span
-                                                                        class="required">*</span></label>
-                                                                <input type="email" name="email" id="email"
-                                                                    class="form__input">
-                                                            </div>
-                                                        </div>
-                                                    </div>
+
+
+
+
                                                     <div class="form__group mb--30 mb-sm--20">
                                                         <div class="row">
                                                             <div class="col-12">
@@ -529,6 +497,9 @@ if (isset($_GET['iddetail'])) {
                                                             </div>
                                                         </div>
                                                     </div>
+
+
+
                                                     <div class="form__group">
                                                         <div class="row">
                                                             <div class="col-12">
