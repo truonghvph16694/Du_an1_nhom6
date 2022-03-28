@@ -1,7 +1,24 @@
 <?php
     require_once 'db.php';
-    $sql_new = "SELECT * FROM `products`" ;
-    $kq_new=$conn->query($sql_new);
+    $sqlcate="SELECT * FROM `categories`";
+    $kqcate=$conn->query($sqlcate);
+
+    
+    if(isset($_GET['iddanhm'])){
+        $sql_new="SELECT * FROM `products` where cate_id =" .$_GET['iddanhm'];
+        $kq_new=$conn->query($sql_new);
+    }else{
+        $sql_new = "SELECT * FROM `products`" ;
+        $kq_new=$conn->query($sql_new);
+    }
+
+    if(isset($_POST['search'])){
+        $search = $_POST['keyword'];
+     
+      $sql_search = "SELECT * FROM `products` where `pro_name` LIKE '%$search%'";
+      $kq_new = $conn->query($sql_search);
+     }
+
 
 ?>
 <!doctype html>
@@ -117,6 +134,18 @@
                             </div>
                             <div class="col-xl-5 col-lg-4 col-md-9 col-8">
                                 <ul class="header-toolbar text-end">
+
+
+
+                                    <li class="header-toolbar__item d-none d-lg-block">
+                                        <div class="searchform-wrapper d-none d-lg-block">
+                                        <form action="" class="searchform searchform-2" method="POST">
+                                            <input type="search" class="searchform__input" name="keyword" id="search2"  placeholder="Search Here...">
+                                            <button type="submit" class="searchform__submit" value="search" name="search" >
+                                        </form> 
+
+                                        </div>
+                                    </li>
                                     <li class="header-toolbar__item d-none d-lg-block">
                                         <a href="#sideNav" class="toolbar-btn">
                                             <i class="dl-icon-menu2"></i>
@@ -473,7 +502,7 @@
                                         <div class="airi-product">
                                             <div class="product-inner">
                                             <a href="product-details.php?iddetail=<?= $key['pro_id']?>&iddanh=<?= $key['cate_id']?>">
-                                            <img src="assets/img/products/<?= $key['pro_image']?>" alt="Product Image" class="primary-image">
+                                            <img src="assets/img/products/<?= $key['pro_image']?>" alt="Product Image" class="">
                                                                 </a>
                                                 <div class="product-info text-center">
                                                     <h3 class="product-title">
@@ -498,38 +527,35 @@
                                     <li><a href="shop-sidebar.html" class="prev page-number"><i
                                                 class="fa fa-angle-double-left"></i></a></li>
                                     <li><span class="current page-number">1</span></li>
-                                    <li><a href="shop-sidebar.html" class="page-number">2</a></li>
-                                    <li><a href="shop-sidebar.html" class="page-number">3</a></li>
-                                    <li><a href="shop-sidebar.html" class="next page-number"><i
+                                    <li><a href="shop-sidebar.php" class="page-number">2</a></li>
+                                    <li><a href="shop-sidebar.php" class="page-number">3</a></li>
+                                    <li><a href="shop-sidebar.php" class="next page-number"><i
                                                 class="fa fa-angle-double-right"></i></a></li>
                                 </ul>
                             </nav>
                         </div>
+
+
+
+
                         <div class="col-lg-3 order-lg-1 mt--30 mt-md--40" id="primary-sidebar">
                             <div class="sidebar-widget">
                                 <!-- Category Widget Start -->
                                 <div class="product-widget categroy-widget mb--35 mb-md--30">
                                     <h3 class="widget-title">Categories</h3>
                                     <ul class="prouduct-categories product-widget__list">
-                                        <li><a href="#">Accessories</a><span class="count">(0)</span></li>
-                                        <li><a href="#">Brands</a><span class="count">(0)</span></li>
-                                        <li><a href="#">Clothing</a><span class="count">(1)</span></li>
-                                        <li><a href="#">Fashions</a><span class="count">(21)</span></li>
-                                        <li><a href="#">Furniture</a><span class="count">(20)</span></li>
-                                        <li><a href="#">Gifts</a><span class="count">(0)</span></li>
-                                        <li><a href="#">Kids</a><span class="count">(0)</span></li>
-                                        <li><a href="#">Men</a><span class="count">(0)</span></li>
-                                        <li><a href="#">New in</a><span class="count">(0)</span></li>
-                                        <li><a href="#">Outlet</a><span class="count">(0)</span></li>
-                                        <li><a href="#">Shoes</a><span class="count">(0)</span></li>
-                                        <li><a href="#">Wallets</a><span class="count">(0)</span></li>
-                                        <li><a href="#">Women</a><span class="count">(0)</span></li>
+                                    <li><a href="shop-sidebar.php">Tất Cả Sản Phẩm</a></li>
+                                    <?php foreach($kqcate as $key1){
+                                                ?>
+                                        <li><a href="shop-sidebar.php?iddanhm=<?= $key1['cate_id']?>"><?= $key1['cate_name']?></a></li>
+                                        <?php }
+                                            ?>
                                     </ul>
                                 </div>
                                 <!-- Category Widget Start -->
 
                                 <!-- Price Filter Widget Start -->
-                                <div class="product-widget product-price-widget mb--40 mb-md--35">
+                                <!-- <div class="product-widget product-price-widget mb--40 mb-md--35">
                                     <h3 class="widget-title">Price</h3>
                                     <div class="widget_content">
                                         <form action="#" method="post">
@@ -561,11 +587,11 @@
                                             </div>
                                         </form>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- Price Filter Widget End -->
 
                                 <!-- Product Size Widget Start -->
-                                <div class="product-widget product-widget--size mb--25 mb-md--20">
+                                <!-- <div class="product-widget product-widget--size mb--25 mb-md--20">
                                     <h3 class="widget-title">Size</h3>
                                     <ul class="product-widget__list two-column-list">
                                         <li><a href="shop-sidebar.html">L</a><span class="count">(2)</span></li>
@@ -575,11 +601,11 @@
                                         <li><a href="shop-sidebar.html">XL</a><span class="count">(2)</span></li>
                                         <li><a href="shop-sidebar.html">L</a><span class="count">(2)</span></li>
                                     </ul>
-                                </div>
+                                </div> -->
                                 <!-- Product Size Widget End -->
 
                                 <!-- Product Color Widget Start -->
-                                <div class="product-widget product-widget--Color mb--25 mb-md--20">
+                                <!-- <div class="product-widget product-widget--Color mb--25 mb-md--20">
                                     <h3 class="widget-title">Color</h3>
                                     <ul class="product-widget__list two-column-list">
                                         <li><a href="shop-sidebar.html">Blue</a><span class="count">(2)</span></li>
@@ -589,11 +615,11 @@
                                         <li><a href="shop-sidebar.html">Red</a><span class="count">(2)</span></li>
                                         <li><a href="shop-sidebar.html">Black</a><span class="count">(2)</span></li>
                                     </ul>
-                                </div>
+                                </div> -->
                                 <!-- Product Color Widget End -->
 
                                 <!-- Product Brand Widget Start -->
-                                <div class="product-widget product-widget--brand mb--40 mb-md--30">
+                                <!-- <div class="product-widget product-widget--brand mb--40 mb-md--30">
                                     <h3 class="widget-title">Brands</h3>
                                     <ul class="product-widget__list">
                                         <li><a href="shop-sidebar.html">Airi</a><span class="count">(2)</span></li>
@@ -601,11 +627,11 @@
                                         <li><a href="shop-sidebar.html">Valention</a><span class="count">(2)</span></li>
                                         <li><a href="shop-sidebar.html">Zara</a><span class="count">(2)</span></li>
                                     </ul>
-                                </div>
+                                </div> -->
                                 <!-- Product Brand Widget End -->
 
                                 <!-- Category Widget Start -->
-                                <div class="product-widget tag-widget mb--35 mb-md--30">
+                                <!-- <div class="product-widget tag-widget mb--35 mb-md--30">
                                     <h3 class="widget-title">Categories</h3>
                                     <div class="tagcloud">
                                         <a href="shop-sidebar.html">chair</a>
@@ -619,7 +645,7 @@
                                         <a href="shop-sidebar.html">table</a>
                                         <a href="shop-sidebar.html">women</a>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- Category Widget Start -->
 
                                 <!-- Promo Widget Start -->

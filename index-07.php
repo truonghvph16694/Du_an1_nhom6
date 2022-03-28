@@ -152,14 +152,7 @@
                                 </div>
                                 <div class="col-xl-4 col-lg-5 col-8">
                                     <div class="header-middle-right">
-                                        <div class="searchform-wrapper d-none d-lg-block">
-                                            <form action="#" class="searchform searchform-2">
-                                                <input type="text" class="searchform__input" id="search2" name="search" placeholder="Search Here...">
-                                                <button type="submit" class="searchform__submit">
-                                                    <i class="dl-icon-search1"></i>
-                                                </button>
-                                            </form>
-                                        </div>
+                                        
                                         <ul class="header-toolbar text-end">
                                             <li class="header-toolbar__item d-none d-lg-block">
                                                 <a href="#sideNav" class="toolbar-btn">
