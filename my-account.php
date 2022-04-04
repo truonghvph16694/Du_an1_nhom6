@@ -1,6 +1,10 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html class="no-js" lang="zxx">
-
+<?php 
+if (isset($_SESSION['auth']) ):?> 
 
 <!-- Mirrored from template.hasthemes.com/airi/airi/my-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 31 Jul 2021 15:15:11 GMT -->
 <head>
@@ -13,7 +17,7 @@
     <link rel="apple-touch-icon" href="assets/img/icon.png">
 
     <!-- Title -->
-    <title>Airi - Clean, Minimal eCommerce Bootstrap 5 Template</title>
+    <title>Tài khoản của tôi</title>
 
     <!-- ************************* CSS Files ************************* -->
 
@@ -127,8 +131,14 @@
                                         </a>
                                         <ul class="user-info-menu">
                                             <li>
-                                                <a href="my-account.php">My Account</a>
+                                                <a href="my-account.php">Tài khoản của tôi</a>
                                             </li>
+                                            <?php 
+                                         if (isset($_SESSION['auth']) ) if( $_SESSION['auth']['role']==1):?> 
+                                             <li>
+                                                <a href="admin.php">Đăng nhập vào trang quản trị</a>
+                                            </li>
+                                         <?php endif?> 
                                             <li>
                                                 <a href="cart.php">Shopping Cart</a>
                                             </li>
@@ -136,14 +146,9 @@
                                                 <a href="checkout.php">Check Out</a>
                                             </li>
                                             <li>
-                                                <a href="#">Wishlist</a>
+                                                <a href="logout.php">Đăng xuất</a>
                                             </li>
-                                            <li>
-                                                <a href="#">Order tracking</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">compare</a>
-                                            </li>
+                                            
                                         </ul>
                                     </li>
                                     <li class="header-toolbar__item">
@@ -264,7 +269,7 @@
                         <ul class="breadcrumb">
                             <li><a href="index-07.php">Home</a></li>
                             <li><a href="shop-sidebar.php">Shop Pages</a></li>
-                            <li class="current"><span>My-account</span></li>
+                            <li class="current"><span>Tài khoản của tôi</span></li>
                         </ul>
                     </div>
                 </div>
@@ -282,25 +287,18 @@
                                 <div class="user-dashboard-tab__head nav flex-md-column" role="tablist"
                                     aria-orientation="vertical">
                                     <a class="nav-link active" data-toggle="pill" role="tab" href="#dashboard"
-                                        aria-controls="dashboard" aria-selected="true">Dashboard</a>
-                                    <a class="nav-link" data-toggle="pill" role="tab" href="#orders"
-                                        aria-controls="orders" aria-selected="true">Orders</a>
-                                    <a class="nav-link" data-toggle="pill" role="tab" href="#downloads"
-                                        aria-controls="downloads" aria-selected="true">Downloads</a>
-                                    <a class="nav-link" data-toggle="pill" role="tab" href="#addresses"
-                                        aria-controls="addresses" aria-selected="true">Addresses</a>
-                                    <a class="nav-link" data-toggle="pill" role="tab" href="#accountdetails"
-                                        aria-controls="accountdetails" aria-selected="true">Account Details</a>
-                                    <a class="nav-link" href="login-register.html">Logout</a>
+                                        aria-controls="dashboard" aria-selected="true">Thông tin tài khoản của tôi</a>
+                                    
+                                  
+                                    <a class="nav-link" href="logout.php">Đăng xuất</a>
                                 </div>
                                 <div class="user-dashboard-tab__content tab-content">
                                     <div class="tab-pane fade show active" id="dashboard">
-                                        <p>Hello <strong>John</strong> (not <strong>John</strong>? <a
-                                                href="login-register.html">Log out</a>)</p>
-                                        <p>From your account dashboard. you can easily check &amp; view your <a
-                                                href="#">recent orders</a>, manage your <a href="#">shipping and billing
-                                                addresses</a> and <a href="#">edit your password and account details</a>.
-                                        </p>
+                                        <p>Tên đăng nhập: <?=$_SESSION['auth']['username']?></p>
+                                        <p>Số điện thoại: <?=$_SESSION['auth']['phonenumber']?></p>
+                                        <p>Email: <?=$_SESSION['auth']['email']?></p>
+                                        <p>Tên đầy đủ: <?=$_SESSION['auth']['fullname']?></p>
+                                        
                                     </div>
                                     <div class="tab-pane fade" id="orders">
                                         <div class="message-box mb--30 d-none">
@@ -947,7 +945,7 @@
     <script src="assets/js/revoulation.js"></script>
 
 </body>
-
+<?php endif?> <br>
 
 <!-- Mirrored from template.hasthemes.com/airi/airi/my-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 31 Jul 2021 15:15:11 GMT -->
 </html>

@@ -1,4 +1,5 @@
 <?php
+session_start();
     require_once 'db.php';
     $sqlcate="SELECT * FROM `categories`";
     $kqcate=$conn->query($sqlcate);
@@ -19,6 +20,7 @@
       $kq_new = $conn->query($sql_search);
      }
 
+     
 
 ?>
 <!doctype html>
@@ -36,7 +38,7 @@
     <link rel="apple-touch-icon" href="assets/img/icon.png">
 
     <!-- Title -->
-    <title>Airi - Clean, Minimal eCommerce Bootstrap 5 Template</title>
+    <title>Cửa hàng</title>
 
     <!-- ************************* CSS Files ************************* -->
 
@@ -70,6 +72,11 @@
 <body>
 
 
+<!-- Đăng nhập vào với tư cách là khách hàng  -->
+
+
+<?php 
+if (isset($_SESSION['auth']) ) if( $_SESSION['auth']['role']==0):?> 
     <div class="ai-preloader active">
         <div class="ai-preloader-inner h-100 d-flex align-items-center justify-content-center">
             <div class="ai-child ai-bounce1"></div>
@@ -111,11 +118,10 @@
                                                 <span class="mm-text">Pages</span>
                                             </a>
                                         </li>
-                                        <li class="mainmenu__item">
-                                            <a href="login-register.php" class="mainmenu__link">
-                                                <span class="mm-text">login-register</span>
-                                            </a>
-                                        </li>
+                                        
+                                        
+                                    
+                                        
                                     </ul>
                                 </nav>
                                 <!-- Main Navigation End Here -->
@@ -157,7 +163,7 @@
                                         </a>
                                         <ul class="user-info-menu">
                                             <li>
-                                                <a href="my-account.php">My Account</a>
+                                                <a href="my-account.php">Tài khoản của tôi</a>
                                             </li>
                                             <li>
                                                 <a href="cart.php">Shopping Cart</a>
@@ -166,13 +172,7 @@
                                                 <a href="checkout.php">Check Out</a>
                                             </li>
                                             <li>
-                                                <a href="#">Wishlist</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Order tracking</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">compare</a>
+                                                <a href="logout.php">Đăng xuất</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -198,6 +198,276 @@
                 <div class="main-sticky-header-height"></div>
             </div>
         </header>
+        <?php endif?> <br>
+
+
+<!-- Đăng nhập vào trang quản trị với vai trò là admin -->
+
+
+      
+<?php 
+if (isset($_SESSION['auth']) ) if( $_SESSION['auth']['role']==1):?> 
+    <div class="ai-preloader active">
+        <div class="ai-preloader-inner h-100 d-flex align-items-center justify-content-center">
+            <div class="ai-child ai-bounce1"></div>
+            <div class="ai-child ai-bounce2"></div>
+            <div class="ai-child ai-bounce3"></div>
+        </div>
+    </div>
+
+    <!-- Main Wrapper Start -->
+    <div class="wrapper">
+        <!-- Header Area Start -->
+        <header class="header header-fullwidth header-style-1">
+            <div class="header-outer">
+                <div class="header-inner fixed-header">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col-xl-5 col-lg-6">
+                                <!-- Main Navigation Start Here -->
+                                <nav class="main-navigation">
+                                    <ul class="mainmenu">
+                                        <li class="mainmenu__item menu-item-has-children megamenu-holder">
+                                            <a href="index-07.php" class="mainmenu__link">
+                                                <span class="mm-text">Home</span>
+                                            </a>
+                                        </li>
+                                        <li class="mainmenu__item menu-item-has-children">
+                                            <a href="shop-sidebar.php" class="mainmenu__link">
+                                                <span class="mm-text">Shop</span>
+                                                <span class="tip">Hot</span>
+                                            </a>
+                                        </li>
+                                        <li class="mainmenu__item">
+                                            <a href="#" class="mainmenu__link">
+                                                <span class="mm-text">Collections</span>
+                                            </a>
+                                        </li>
+                                        <li class="mainmenu__item menu-item-has-children has-children">
+                                            <a href="#" class="mainmenu__link">
+                                                <span class="mm-text">Pages</span>
+                                            </a>
+                                        </li>
+                                        
+                                        
+                                    
+                                        
+                                    </ul>
+                                </nav>
+                                <!-- Main Navigation End Here -->
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4 text-lg-center">
+                                <!-- Logo Start Here -->
+                                <a href="index-2.html" class="logo-box">
+                                    <figure class="logo--normal">
+                                        <img src="assets/img/logo/logo.svg" alt="Logo" />
+                                    </figure>
+                                    <figure class="logo--transparency">
+                                        <img src="assets/img/logo/logo-white.png" alt="Logo" />
+                                    </figure>
+                                </a>
+                                <!-- Logo End Here -->
+                            </div>
+                            <div class="col-xl-5 col-lg-4 col-md-9 col-8">
+                                <ul class="header-toolbar text-end">
+
+
+
+                                    <li class="header-toolbar__item d-none d-lg-block">
+                                        <div class="searchform-wrapper d-none d-lg-block">
+                                        <form action="" class="searchform searchform-2" method="POST">
+                                            <input type="search" class="searchform__input" name="keyword" id="search2"  placeholder="Search Here...">
+                                            <button type="submit" class="searchform__submit" value="search" name="search" >
+                                        </form> 
+
+                                        </div>
+                                    </li>
+                                    <li class="header-toolbar__item d-none d-lg-block">
+                                        <a href="#sideNav" class="toolbar-btn">
+                                            <i class="dl-icon-menu2"></i>
+                                        </a>
+                                    </li>
+                                    <li class="header-toolbar__item user-info-menu-btn">
+                                        <a href="#">
+                                            <i class="fa fa-user-circle-o"></i>
+                                        </a>
+                                        <ul class="user-info-menu">
+                                            <li>
+                                                <a href="my-account.php">Tài khoản của tôi</a>
+                                            </li>
+                                            <li>
+                                                <a href="admin.php">Đăng nhập vào trang quản trị</a>
+                                            </li>
+                                            <li>
+                                                <a href="cart.php">Shopping Cart</a>
+                                            </li>
+                                            <li>
+                                                <a href="checkout.php">Check Out</a>
+                                            </li>
+                                            <li>
+                                                <a href="logout.php">Đăng xuất</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="header-toolbar__item">
+                                        <a href="#miniCart" class="mini-cart-btn toolbar-btn">
+                                            <i class="dl-icon-cart4"></i>
+                                            <sup class="mini-cart-count">2</sup>
+                                        </a>
+                                    </li>
+                                    <li class="header-toolbar__item">
+                                        <a href="#searchForm" class="search-btn toolbar-btn">
+                                            <i class="dl-icon-search1"></i>
+                                        </a>
+                                    </li>
+                                    <li class="header-toolbar__item d-lg-none">
+                                        <a href="#" class="menu-btn"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-sticky-header-height"></div>
+            </div>
+        </header>
+        <?php endif?> <br>
+
+
+
+<!-- Khi không đăng nhập, không có tài khoản -->
+
+        <?php 
+if (!isset($_SESSION['auth']) ):?> 
+    <div class="ai-preloader active">
+        <div class="ai-preloader-inner h-100 d-flex align-items-center justify-content-center">
+            <div class="ai-child ai-bounce1"></div>
+            <div class="ai-child ai-bounce2"></div>
+            <div class="ai-child ai-bounce3"></div>
+        </div>
+    </div>
+
+    <!-- Main Wrapper Start -->
+    <div class="wrapper">   
+        <!-- Header Area Start -->
+        <header class="header header-fullwidth header-style-1">
+            <div class="header-outer">
+                <div class="header-inner fixed-header">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col-xl-5 col-lg-6">
+                                <!-- Main Navigation Start Here -->
+                                <nav class="main-navigation">
+                                    <ul class="mainmenu">
+                                        <li class="mainmenu__item menu-item-has-children megamenu-holder">
+                                            <a href="index-07.php" class="mainmenu__link">
+                                                <span class="mm-text">Home</span>
+                                            </a>
+                                        </li>
+                                        <li class="mainmenu__item menu-item-has-children">
+                                            <a href="shop-sidebar.php" class="mainmenu__link">
+                                                <span class="mm-text">Shop</span>
+                                                <span class="tip">Hot</span>
+                                            </a>
+                                        </li>
+                                        <li class="mainmenu__item">
+                                            <a href="#" class="mainmenu__link">
+                                                <span class="mm-text">Collections</span>
+                                            </a>
+                                        </li>
+                                        <li class="mainmenu__item menu-item-has-children has-children">
+                                            <a href="#" class="mainmenu__link">
+                                                <span class="mm-text">Pages</span>
+                                            </a>
+                                        </li>
+                                        <li class="mainmenu__item menu-item-has-children has-children">
+                                            <a href="formdangki.php" class="mainmenu__link">
+                                                <span class="mm-text">Đăng kí</span>
+                                            </a>
+                                        </li>
+                                        <li class="mainmenu__item menu-item-has-children has-children">
+                                            <a href="formdangnhap.php" class="mainmenu__link">
+                                                <span class="mm-text">Đăng nhập</span>
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                    </ul>
+                                </nav>
+                                <!-- Main Navigation End Here -->
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-4 text-lg-center">
+                                <!-- Logo Start Here -->
+                                <a href="index-2.html" class="logo-box">
+                                    <figure class="logo--normal">
+                                        <img src="assets/img/logo/logo.svg" alt="Logo" />
+                                    </figure>
+                                    <figure class="logo--transparency">
+                                        <img src="assets/img/logo/logo-white.png" alt="Logo" />
+                                    </figure>
+                                </a>
+                                <!-- Logo End Here -->
+                            </div>
+                            <div class="col-xl-5 col-lg-4 col-md-9 col-8">
+                                <ul class="header-toolbar text-end">
+
+
+
+                                    <li class="header-toolbar__item d-none d-lg-block">
+                                        <div class="searchform-wrapper d-none d-lg-block">
+                                        <form action="" class="searchform searchform-2" method="POST">
+                                            <input type="search" class="searchform__input" name="keyword" id="search2"  placeholder="Search Here...">
+                                            <button type="submit" class="searchform__submit" value="search" name="search" >
+                                        </form> 
+
+                                        </div>
+                                    </li>
+                                    <li class="header-toolbar__item d-none d-lg-block">
+                                        <a href="#sideNav" class="toolbar-btn">
+                                            <i class="dl-icon-menu2"></i>
+                                        </a>
+                                    </li>
+                                    <li class="header-toolbar__item user-info-menu-btn">
+                                        <a href="#">
+                                            <i class="fa fa-user-circle-o"></i>
+                                        </a>
+                                        <ul class="user-info-menu">
+                                            
+                                            <li>
+                                                <a href="cart.php">Shopping Cart</a>
+                                            </li>
+                                            <li>
+                                                <a href="checkout.php">Check Out</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                    <li class="header-toolbar__item">
+                                        <a href="#miniCart" class="mini-cart-btn toolbar-btn">
+                                            <i class="dl-icon-cart4"></i>
+                                            <sup class="mini-cart-count">2</sup>
+                                        </a>
+                                    </li>
+                                    <li class="header-toolbar__item">
+                                        <a href="#searchForm" class="search-btn toolbar-btn">
+                                            <i class="dl-icon-search1"></i>
+                                        </a>
+                                    </li>
+                                    <li class="header-toolbar__item d-lg-none">
+                                        <a href="#" class="menu-btn"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-sticky-header-height"></div>
+            </div>
+        </header>
+        <?php endif?> <br>
+
+
+
         <!-- Header Area End -->
 
         <!-- Mobile Header area Start -->
@@ -264,11 +534,7 @@
                                                 Pages
                                             </a>
                                         </li>
-                                        <li class="mainmenu__item">
-                                            <a href="login-register.php" class="mainmenu__link">
-                                                <span class="mm-text">login-register</span>
-                                            </a>
-                                        </li>
+                                        
                                     </ul>
                                 </div>
                                 <!-- Mobile Navigation End Here -->

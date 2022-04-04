@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'db.php';
 // lấy sản phẩm cùng danh mục
 if (isset($_GET['iddanh'])) {
@@ -17,6 +18,24 @@ if (isset($_GET['iddetail'])) {
  $kqdetail = $conn->query($sqldetail);
 }
 
+if (isset($_GET['iddetail'])) {
+    $idchitiet = $_GET['iddetail'];
+  $sqldetail1 = "SELECT * FROM products_detail WHERE pro_id = $idchitiet";
+  $kqdetail1 = $conn->query($sqldetail1);
+ }
+
+$sql1="SELECT * FROM `users`";
+$kq1 = $conn->query($sql1);
+//bình luận
+if(isset($_POST['content'])){
+    $content=$_POST['content'];
+     $idsanpham=$_GET['iddetail'];
+    $idtk = $_SESSION['auth']['id'];
+    $cmtadd = $conn->query("INSERT INTO  comments(user_id ,pro_id ,cmt_content) VALUES('$idtk','$idsanpham','$content')");
+
+   
+}
+    
  
 ?>
 
@@ -34,7 +53,10 @@ if (isset($_GET['iddetail'])) {
     <!-- Favicons -->
     <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="assets/img/icon.png">
-
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <!-- Title -->
     <title>Airi - Clean, Minimal eCommerce Bootstrap 5 Template</title>
 
@@ -292,8 +314,6 @@ if (isset($_GET['iddetail'])) {
                 <div class="container-fluid">
                         <?php
                                 foreach($kqdetail as $key){
-
-                                
                             ?>
                     <div class="row pt--40">
                         <div class="col-md-6 product-main-image">
@@ -351,10 +371,17 @@ if (isset($_GET['iddetail'])) {
                                                 min="1">
                                         </div>
                                         <button type="button" class="btn btn-style-1 btn-large add-to-cart">
-                                            Add To Cart
+                                        <a href="" class="btn btn-primary"> Mua ngay</a>
                                         </button>
-                                        <a href="wishlist.html"><i class="dl-icon-heart2"></i></a>
-                                        <a href="compare.html"><i class="dl-icon-compare2"></i></a>
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option selected>Chọn Size Sản Phẩm</option>
+                                            <?php
+                                                    foreach($kqdetail1 as $key1){
+                                                ?>
+                                            <option value="<?= $key1['prodt_id']?>"><?= $key1['size']?>(<?= $key1['quantity']?>)</option>
+                                            <?php } ?>
+                                        </select>
+                                        
                                     </div>
                                 </form>
                                 <div class="product-extra mb--40 mb-sm--20">
@@ -421,44 +448,35 @@ if (isset($_GET['iddetail'])) {
                                     </button>
                                     <button type="button" class="product-data-tab__link nav-link" id="nav-reviews-tab" data-bs-toggle="tab"
                                         data-bs-target="#nav-reviews" role="tab" aria-selected="true">
-                                        <span>Reviews(1)</span>
+                                        <span>Reviews</span>
                                     </button>
                                 </div>
                                 <div class="tab-content product-data-tab__content" id="product-tabContent">
                                     <div class="tab-pane fade show active" id="nav-description" role="tabpanel"
                                         aria-labelledby="nav-description-tab">
                                         <div class="product-description">
-                                            <p>Donec accumsan auctor iaculis. Sed suscipit arcu ligula, at egestas magna
-                                                molestie a. Proin ac ex maximus, ultrices justo eget, sodales orci.
-                                                Aliquam egestas libero ac turpis pharetra, in vehicula lacus
-                                                scelerisque. Vestibulum ut sem laoreet, feugiat tellus at, hendrerit
-                                                arcu.
+                                        <?php
+                                            foreach($kqdetail as $key){
+                                                                 ?>
+                                            <?php echo $key['mo_ta'] ?>
 
-                                                <p>Nunc lacus elit, faucibus ac laoreet sed, dapibus ac mi. Maecenas eu
-                                                    ante a elit tempus fermentum. Aliquam commodo tincidunt semper.
-                                                    Phasellus accumsan, justo ac mollis pharetra, ex dui pharetra nisl,
-                                                    a scelerisque ipsum nulla ac sem. Cras eu risus urna. Duis lorem
-                                                    sapien, congue eget nisl sit amet, rutrum faucibus elit.</p>
-
-                                                <ul>
-                                                    <li>Maecenas eu ante a elit tempus fermentum. Aliquam commodo
-                                                        tincidunt semper</li>
-                                                    <li>Aliquam est et tempus. Eaecenas libero ante, tincidunt vel</li>
-                                                </ul>
-
-                                                <p>Curabitur sodales euismod nibh. Sed iaculis sed orci eget semper. Nam
-                                                    auctor, augue et eleifend tincidunt, felis mauris convallis neque,
-                                                    in placerat metus urna laoreet diam. Morbi sagittis facilisis arcu
-                                                    sed ornare. Maecenas dictum urna ut facilisis rhoncus.iaculis sed
-                                                    orci eget semper. Nam auctor, augue et eleifend tincidunt, felis
-                                                    mauris</p>
+                                            <?php } ?>
                                         </div>
                                     </div>
+
+                                   
+
+
+
                                     <div class="tab-pane fade" id="nav-reviews" role="tabpanel"
                                         aria-labelledby="nav-reviews-tab">
                                         <div class="product-reviews">
-                                            <h3 class="review__title">1 review for Waxed-effect pleated skirt</h3>
                                             <ul class="review__list">
+                                            <?php 
+                                                $binhluan ="SELECT * FROM comments INNER JOIN users ON comments.user_id = users.id ORDER BY cmt_id DESC  LIMIT 4 ";
+                                                
+                                                $query =  $conn->query($binhluan);
+                                                foreach($query as $key) { ?>
                                                 <li class="review__item">
                                                     <div class="review__container">
                                                         <img src="assets/img/others/comment-icon-2.png"
@@ -466,48 +484,41 @@ if (isset($_GET['iddetail'])) {
                                                         <div class="review__text">
                                                             
                                                             <div class="review__meta">
-                                                                <strong class="review__author">John Snow </strong>
+                                                                <strong class="review__author"><?php echo $key['fullname'] ?> </strong>
                                                                 <span class="review__dash">-</span>
-                                                                <span class="review__published-date">November 20,
-                                                                    2018</span>
+                                                                <span class="review__published-date"><?php echo $key['cmt_date'] ?></span>
                                                             </div>
-                                                            <div class="clearfix"></div>
-                                                            <p class="review__description">Aliquam egestas libero ac
-                                                                turpis pharetra, in vehicula lacus scelerisque.
-                                                                Vestibulum ut sem laoreet, feugiat tellus at, hendrerit
-                                                                arcu.</p>
+                                                            <div>
+                                                                <p><?php echo $key['cmt_content'] ?></p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </li>
+                                                <?php } ?>
                                             </ul>
                                             <div class="review-form-wrapper">
                                                 <span class="reply-title"><strong>Add a review</strong></span>
-                                                <form action="#" class="form">
-
-
-
-
-                                                    <div class="form__group mb--30 mb-sm--20">
-                                                        <div class="row">
-                                                            <div class="col-12">
-                                                                <label class="form__label" for="email">Your Review<span
-                                                                        class="required">*</span></label>
-                                                                <textarea name="review" id="review"
-                                                                    class="form__input form__input--textarea"></textarea>
-                                                            </div>
-                                                        </div>
+                                                <?php
+                                                    if(isset($_SESSION['auth'])){
+                                                        ?>
+                                                        <div class="form-group">
+                                                        <input name="content" class="form-control" type="text" placeholder="Mời bạn nhập bình luận" />
                                                     </div>
-
-
-
-                                                    <div class="form__group">
-                                                        <div class="row">
-                                                            <div class="col-12">
-                                                                <input type="submit" value="Submit"
+                                                    <div class="form-group">
+                                                    <input type="submit" value="Submit"
                                                                     class="btn btn-style-1 btn-submit">
-                                                            </div>
-                                                        </div>
                                                     </div>
+                                                        <?php }
+                                                        else{        
+                                                    ?>
+                                                    <h3><a href="formdangnhap.php">Bạn phải Đăng nhập thì mới có thể Bình Luận</a></h3>
+                                                    <?php   } ?>
+                                                <form role="form" method="POST"  class="form">
+
+
+
+
+                                                
                                                 </form>
                                             </div>
                                         </div>

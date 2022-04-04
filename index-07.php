@@ -1,4 +1,6 @@
 <?php
+session_start();
+include './db2.php';
     require_once 'db.php';
     $sql_new = "SELECT * FROM `products` WHERE products.pro_id ORDER BY `pro_id` DESC LIMIT 8 " ;
     $kq_new=$conn->query($sql_new);
@@ -18,7 +20,7 @@
     <link rel="apple-touch-icon" href="assets/img/icon.png">
 
     <!-- Title -->
-    <title>Airi - Clean, Minimal eCommerce Bootstrap 5 Template</title>
+    <title>Trang chủ</title>
 
     <!-- ************************* CSS Files ************************* -->
 
@@ -51,6 +53,10 @@
 
 <body>
 
+<!-- Đăng nhập vào trang web với vai trò là khách hàng -->
+
+<?php 
+if (isset($_SESSION['auth']) )if( $_SESSION['auth']['role']==0):?> 
 
     <div class="ai-preloader active">
         <div class="ai-preloader-inner h-100 d-flex align-items-center justify-content-center">
@@ -68,29 +74,12 @@
                 <div class="container-fluid">
                     <div class="row align-items-center">
                         <div class="col-md-6 text-center text-md-start">
-                            <span class="header-text">Welcome to AIRI Mutipurpose eCommerce Theme</span>
+                       
+    <div class="dangxuat"><a onclick="return confirm('Bạn có muốn đăng xuất không?')" href="logout.php">Đăng Xuất</a></div>
+    <h2>Xin chào, <?=$_SESSION['auth']['fullname']?>!!</h2>
+    
                         </div>
-                        <div class="col-md-6">
-                            <div class="header-component">
-                                <div class="header-component__item header-component__language">
-                                    <a href="#">Language: <span>English</span></a>
-                                    <ul class="header-component__menu">
-                                        <li><a href="#">English</a></li>
-                                        <li><a href="#">France</a></li>
-                                        <li><a href="#">Germany</a></li>
-                                    </ul>
-                                </div>
-                                <div class="header-component__item header-component__currency">
-                                    <a href="#">Currency: <span>USD</span></a>
-                                    <ul class="header-component__menu">
-                                        <li><a href="#">USD</a></li>
-                                        <li><a href="#">EUR</a></li>
-                                        <li><a href="#">GBP</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        
                 </div>
             </div>
             <div class="header-outer">
@@ -138,7 +127,7 @@
                                         </div>
                                         <div class="header-contact-info__item">
                                             <span>LOCATION</span>
-                                            <span>United Kingdom</span>
+                                            <span>Việt Nam</span>
                                         </div>
                                     </div>
                                     <!-- Contact Info End Here -->
@@ -164,9 +153,360 @@
                                                     <i class="fa fa-user-circle-o"></i>
                                                 </a>
                                                 <ul class="user-info-menu">
-                                                    <li>
-                                                        <a href="my-account.php">My Account</a>
+                                                    
+                                                <li>
+                                                        <a href="my-account.php">Tài khoản của tôi</a>
                                                     </li>
+                                                    
+                                                    <li>
+                                                        <a href="cart.php">Shopping Cart</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="checkout.php">Check Out</a>
+                                                    </li>
+                                                    <li>
+                                                <a href="logout.php">Đăng xuất</a>
+                                            </li>
+                                                </ul>
+                                            </li>
+                                             
+                                            <li class="header-toolbar__item">
+                                                <a href="#miniCart" class="mini-cart-btn toolbar-btn">
+                                                    <i class="dl-icon-cart4"></i>
+                                                    <sup class="mini-cart-count">2</sup>
+                                                </a>
+                                            </li>
+                                            <li class="header-toolbar__item">
+                                                <a href="#searchForm" class="search-btn toolbar-btn">
+                                                    <i class="dl-icon-search1"></i>
+                                                </a>
+                                            </li>
+                                            <li class="header-toolbar__item d-lg-none">
+                                                <a href="#" class="menu-btn"></a>                 
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-bottom">
+                        <div class="container-fluid">
+                            <div class="row justify-content-center">
+                                <div class="col-12">
+                                    <!-- Main Navigation Start Here -->
+                                    <nav class="main-navigation">
+                                        <ul class="mainmenu mainmenu--2 mainmenu--centered">
+                                            <li class="mainmenu__item menu-item-has-children megamenu-holder">
+                                                <a href="index-07.php" class="mainmenu__link">
+                                                    <span class="mm-text">Home</span>
+                                                </a>
+                                            </li>
+                                            <li class="mainmenu__item menu-item-has-children">
+                                                <a href="shop-sidebar.php" class="mainmenu__link">
+                                                    <span class="mm-text">Shop</span>
+                                                    <span class="tip">Hot</span>
+                                                </a>
+                                            </li>
+                                            <li class="mainmenu__item">
+                                                <a href="#" class="mainmenu__link">
+                                                    <span class="mm-text">Collections</span>
+                                                </a>
+                                            </li>
+                                            <li class="mainmenu__item menu-item-has-children has-children">
+                                                <a href="#" class="mainmenu__link">
+                                                    <span class="mm-text">Pages</span>
+                                                </a>
+                                            </li>
+                                           
+                                        </ul>
+                                    </nav>
+                                    <?php endif?> 
+
+
+
+<!-- Đăng nhập vào trang quản trị với vai trò là admin -->
+
+    <?php 
+if (isset($_SESSION['auth']) ) if( $_SESSION['auth']['role']==1):?> 
+
+    <div class="ai-preloader active">
+        <div class="ai-preloader-inner h-100 d-flex align-items-center justify-content-center">
+            <div class="ai-child ai-bounce1"></div>
+            <div class="ai-child ai-bounce2"></div>
+            <div class="ai-child ai-bounce3"></div>
+        </div>
+    </div>
+  
+    <!-- Main Wrapper Start -->
+    <div class="wrapper">
+        <!-- Header Area Start -->
+        <header class="header header-fullwidth header-style-3">
+            <div class="header-top">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 text-center text-md-start">
+                       
+    <div class="dangxuat"><a onclick="return confirm('Bạn có muốn đăng xuất không?')" href="logout.php">Đăng Xuất</a></div>
+    <h2>Xin chào, <?=$_SESSION['auth']['fullname']?>!!</h2>
+    
+                        </div>
+                        
+                </div>
+            </div>
+            <div class="header-outer">
+                <div class="header-inner fixed-header">
+                    <div class="header-middle">
+                        <div class="container-fluid">
+                            <div class="row align-items-center">
+                                <div class="col-xl-4 col-lg-5 d-lg-block d-none">
+                                    <!-- Social Icons Start Here -->
+                                    <ul class="social social-medium mb--20">
+                                        <li class="social__item">
+                                            <a href="https://www.facebook.com/" class="social__link">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li class="social__item">
+                                            <a href="https://www.twitter.com/" class="social__link">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+    
+                                        <li class="social__item">
+                                            <a href="https://www.pinterest.com/" class="social__link">
+                                                <i class="fa fa-pinterest-p"></i>
+                                            </a>
+                                        </li>
+                                        <li class="social__item">
+                                            <a href="https://www.linkedin.com/" class="social__link">
+                                                <i class="fa fa-linkedin-square"></i>
+                                            </a>
+                                        </li>
+                                        <li class="social__item">
+                                            <a href="https://www.behance.net/" class="social__link">
+                                                <i class="fa fa-behance"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <!-- Social Icons End Here -->
+    
+                                    <!-- Contact Info Start Here -->
+                                    <div class="header-contact-info">
+                                        <div class="header-contact-info__item">
+                                            <span>24/7 HOTLINE</span>
+                                            <span>(+85) 246 888 9889</span>
+                                        </div>
+                                        <div class="header-contact-info__item">
+                                            <span>LOCATION</span>
+                                            <span>Việt Nam</span>
+                                        </div>
+                                    </div>
+                                    <!-- Contact Info End Here -->
+                                </div>
+                                <div class="col-xl-4 col-lg-2 col-4 text-lg-center">
+                                    <a href="index-2.html" class="logo-box">
+                                        <figure class="logo--normal">
+                                            <img src="assets/img/logo/logo.svg" alt="logo">
+                                        </figure>
+                                    </a>
+                                </div>
+                                <div class="col-xl-4 col-lg-5 col-8">
+                                    <div class="header-middle-right">
+                                        
+                                        <ul class="header-toolbar text-end">
+                                            <li class="header-toolbar__item d-none d-lg-block">
+                                                <a href="#sideNav" class="toolbar-btn">
+                                                    <i class="dl-icon-menu2"></i>
+                                                </a>                                    
+                                            </li>
+                                            <li class="header-toolbar__item user-info-menu-btn">
+                                                <a href="#">
+                                                    <i class="fa fa-user-circle-o"></i>
+                                                </a>
+                                                <ul class="user-info-menu">
+                                                    
+                                                <li>
+                                                        <a href="my-account.php">Tài khoản của tôi</a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a href="admin.php">Đăng nhập trang quản trị</a>
+                                                    </li>
+                                                    
+                                                    <li>
+                                                        <a href="cart.php">Shopping Cart</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="checkout.php">Check Out</a>
+                                                    </li>
+                                                    <li>
+                                                <a href="logout.php">Đăng xuất</a>
+                                            </li>
+                                                </ul>
+                                            </li>
+                                             
+                                            <li class="header-toolbar__item">
+                                                <a href="#miniCart" class="mini-cart-btn toolbar-btn">
+                                                    <i class="dl-icon-cart4"></i>
+                                                    <sup class="mini-cart-count">2</sup>
+                                                </a>
+                                            </li>
+                                            <li class="header-toolbar__item">
+                                                <a href="#searchForm" class="search-btn toolbar-btn">
+                                                    <i class="dl-icon-search1"></i>
+                                                </a>
+                                            </li>
+                                            <li class="header-toolbar__item d-lg-none">
+                                                <a href="#" class="menu-btn"></a>                 
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-bottom">
+                        <div class="container-fluid">
+                            <div class="row justify-content-center">
+                                <div class="col-12">
+                                    <!-- Main Navigation Start Here -->
+                                    <nav class="main-navigation">
+                                        <ul class="mainmenu mainmenu--2 mainmenu--centered">
+                                            <li class="mainmenu__item menu-item-has-children megamenu-holder">
+                                                <a href="index-07.php" class="mainmenu__link">
+                                                    <span class="mm-text">Home</span>
+                                                </a>
+                                            </li>
+                                            <li class="mainmenu__item menu-item-has-children">
+                                                <a href="shop-sidebar.php" class="mainmenu__link">
+                                                    <span class="mm-text">Shop</span>
+                                                    <span class="tip">Hot</span>
+                                                </a>
+                                            </li>
+                                            <li class="mainmenu__item">
+                                                <a href="#" class="mainmenu__link">
+                                                    <span class="mm-text">Collections</span>
+                                                </a>
+                                            </li>
+                                            <li class="mainmenu__item menu-item-has-children has-children">
+                                                <a href="#" class="mainmenu__link">
+                                                    <span class="mm-text">Pages</span>
+                                                </a>
+                                            </li>
+                                           
+                                        </ul>
+                                    </nav>
+                                    <?php endif?> 
+
+<!-- Chưa đăng nhập, chưa có tài khoản -->
+
+
+    <?php 
+if (!isset($_SESSION['auth']) ):?> 
+
+    <div class="ai-preloader active">
+        <div class="ai-preloader-inner h-100 d-flex align-items-center justify-content-center">
+            <div class="ai-child ai-bounce1"></div>
+            <div class="ai-child ai-bounce2"></div>
+            <div class="ai-child ai-bounce3"></div>
+        </div>
+    </div>
+  
+    <!-- Main Wrapper Start -->
+    <div class="wrapper">
+        <!-- Header Area Start -->
+        <header class="header header-fullwidth header-style-3">
+            <div class="header-top">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 text-center text-md-start">
+                       
+    
+    
+                        </div>
+                        
+                </div>
+            </div>
+            <div class="header-outer">
+                <div class="header-inner fixed-header">
+                    <div class="header-middle">
+                        <div class="container-fluid">
+                            <div class="row align-items-center">
+                                <div class="col-xl-4 col-lg-5 d-lg-block d-none">
+                                    <!-- Social Icons Start Here -->
+                                    <ul class="social social-medium mb--20">
+                                        <li class="social__item">
+                                            <a href="https://www.facebook.com/" class="social__link">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li class="social__item">
+                                            <a href="https://www.twitter.com/" class="social__link">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+    
+                                        <li class="social__item">
+                                            <a href="https://www.pinterest.com/" class="social__link">
+                                                <i class="fa fa-pinterest-p"></i>
+                                            </a>
+                                        </li>
+                                        <li class="social__item">
+                                            <a href="https://www.linkedin.com/" class="social__link">
+                                                <i class="fa fa-linkedin-square"></i>
+                                            </a>
+                                        </li>
+                                        <li class="social__item">
+                                            <a href="https://www.behance.net/" class="social__link">
+                                                <i class="fa fa-behance"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <!-- Social Icons End Here -->
+    
+                                    <!-- Contact Info Start Here -->
+                                    <div class="header-contact-info">
+                                        <div class="header-contact-info__item">
+                                            <span>24/7 HOTLINE</span>
+                                            <span>(+85) 246 888 9889</span>
+                                        </div>
+                                        <div class="header-contact-info__item">
+                                            <span>LOCATION</span>
+                                            <span>Việt Nam</span>
+                                        </div>
+                                    </div>
+                                    <!-- Contact Info End Here -->
+                                </div>
+                                <div class="col-xl-4 col-lg-2 col-4 text-lg-center">
+                                    <a href="index-2.html" class="logo-box">
+                                        <figure class="logo--normal">
+                                            <img src="assets/img/logo/logo.svg" alt="logo">
+                                        </figure>
+                                    </a>
+                                </div>
+                                <div class="col-xl-4 col-lg-5 col-8">
+                                    <div class="header-middle-right">
+                                        
+                                        <ul class="header-toolbar text-end">
+                                            <li class="header-toolbar__item d-none d-lg-block">
+                                                <a href="#sideNav" class="toolbar-btn">
+                                                    <i class="dl-icon-menu2"></i>
+                                                </a>                                    
+                                            </li>
+                                            <li class="header-toolbar__item user-info-menu-btn">
+                                                <a href="#">
+                                                    <i class="fa fa-user-circle-o"></i>
+                                                </a>
+                                                <ul class="user-info-menu">
+                                                    
+                                                <li>
+                                                        <a href="formdangnhap.php">Đăng nhập</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="formdangki.php">Đăng kí</a>
+                                                    </li>
+                                                    
                                                     <li>
                                                         <a href="cart.php">Shopping Cart</a>
                                                     </li>
@@ -175,6 +515,7 @@
                                                     </li>
                                                 </ul>
                                             </li>
+                                             
                                             <li class="header-toolbar__item">
                                                 <a href="#miniCart" class="mini-cart-btn toolbar-btn">
                                                     <i class="dl-icon-cart4"></i>
@@ -224,12 +565,18 @@
                                                 </a>
                                             </li>
                                             <li class="mainmenu__item">
-                                                <a href="login-register.php" class="mainmenu__link">
-                                                    <span class="mm-text">login-register</span>
+                                                <a href="formdangki.php" class="mainmenu__link">
+                                                    <span class="mm-text">Đăng kí</span>
+                                                </a>
+                                            </li>
+                                            <li class="mainmenu__item">
+                                                <a href="formdangnhap.php" class="mainmenu__link">
+                                                    <span class="mm-text">Đăng nhập</span>
                                                 </a>
                                             </li>
                                         </ul>
                                     </nav>
+                                    <?php endif?> <br>
                                     <!-- Main Navigation End Here -->
                                 </div>
                             </div>
@@ -262,7 +609,7 @@
                                         </a>
                                         <ul class="user-info-menu">
                                             <li>
-                                                <a href="my-account.html">My Account</a>
+                                                <a href="my-account.html">Tài khoản của tôi</a>
                                             </li>
                                             <li>
                                                 <a href="cart.html">Shopping Cart</a>
