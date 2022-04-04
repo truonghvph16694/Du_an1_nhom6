@@ -177,9 +177,8 @@ if (isset($_SESSION['auth']) ) if( $_SESSION['auth']['role']==0):?>
                                         </ul>
                                     </li>
                                     <li class="header-toolbar__item">
-                                        <a href="#miniCart" class="mini-cart-btn toolbar-btn">
+                                        <a href="cart.php" class="">
                                             <i class="dl-icon-cart4"></i>
-                                            <sup class="mini-cart-count">2</sup>
                                         </a>
                                     </li>
                                     <li class="header-toolbar__item">
