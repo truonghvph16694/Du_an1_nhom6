@@ -29,7 +29,7 @@ $kq1 = $conn->query($sql1);
 //bình luận
 if(isset($_POST['content'])){
     $content=$_POST['content'];
-     $idsanpham=$_GET['iddetail'];
+    $idsanpham=$_GET['iddetail'];
     $idtk = $_SESSION['auth']['id'];
     $cmtadd = $conn->query("INSERT INTO  comments(user_id ,pro_id ,cmt_content) VALUES('$idtk','$idsanpham','$content')");
 
@@ -501,6 +501,7 @@ if(isset($_POST['content'])){
                                                 <?php
                                                     if(isset($_SESSION['auth'])){
                                                         ?>
+                                                        <form role="form" method="POST"  class="form">
                                                         <div class="form-group">
                                                         <input name="content" class="form-control" type="text" placeholder="Mời bạn nhập bình luận" />
                                                     </div>
@@ -508,18 +509,13 @@ if(isset($_POST['content'])){
                                                     <input type="submit" value="Submit"
                                                                     class="btn btn-style-1 btn-submit">
                                                     </div>
+                                                </form>
                                                         <?php }
                                                         else{        
                                                     ?>
                                                     <h3><a href="formdangnhap.php">Bạn phải Đăng nhập thì mới có thể Bình Luận</a></h3>
                                                     <?php   } ?>
-                                                <form role="form" method="POST"  class="form">
-
-
-
-
                                                 
-                                                </form>
                                             </div>
                                         </div>
                                     </div>

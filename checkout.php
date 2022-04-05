@@ -1,11 +1,12 @@
 <?php
 session_start();
 require_once './db.php';
+
 $sql1 ="SELECT * FROM `users`";
 $kq1 = $conn->query($sql1);
 $sql = "SELECT * FROM `products`";
 $kq = $conn->query($sql);
-$cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : ['cart'];
+$cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : [];
 ?>
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -289,18 +290,7 @@ $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : ['cart'];
                             <!-- User Action Start -->
                             <div class="user-actions user-actions__coupon">
                                 
-                                <div id="coupon_info" class="user-actions__form hide-in-default">
-                                    <form action="#" class="form">
-                                        <p>If you have a coupon code, please apply it below.</p>
-                                        <div class="form__group d-sm-flex">
-                                            <input type="text" name="coupon" id="coupon"
-                                                class="form__input form__input--2 mr--20 mr-xs--0"
-                                                placeholder="Coupon Code">
-                                            <button type="submit" class="btn btn-medium btn-style-1">Apply
-                                                Coupon</button>
-                                        </div>
-                                    </form>
-                                </div>
+                                
                             </div>
                             <!-- User Action End -->
                         </div>
@@ -312,26 +302,12 @@ $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : ['cart'];
                                 <h2>Billing Details</h2>
                             </div>
                             <div class="checkout-form">
-                                <form action="#" class="form form--checkout">
+                                <form  class="form form--checkout" method="POST">
                                     <div class="row mb--30">
-                                        <div class="form__group col-md-6 mb-sm--30">
-                                            <label for="billing_fname" class="form__label form__label--2">First Name
-                                                <span class="required">*</span></label>
-                                            <input type="text" name="billing_fname" id="billing_fname"
-                                                class="form__input form__input--2">
-                                        </div>
                                         <div class="form__group col-md-6">
-                                            <label for="billing_lname" class="form__label form__label--2">Last Name
+                                            <label for="billing_lname" class="form__label form__label--2">Name
                                                 <span class="required">*</span></label>
-                                            <input type="text" name="billing_lname" id="billing_lname"
-                                                class="form__input form__input--2">
-                                        </div>
-                                    </div>
-                                    <div class="row mb--30">
-                                        <div class="form__group col-12">
-                                            <label for="billing_country" class="form__label form__label--2">Country
-                                                <span class="required">*</span></label>
-                                           <input type="text">
+                                            <h3><?php echo $_SESSION['auth']['fullname']?></h3>
                                         </div>
                                     </div>
                                     <div class="row mb--30">
@@ -342,42 +318,20 @@ $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : ['cart'];
                                             <input type="text" name="billing_streetAddress" id="billing_streetAddress"
                                                 class="form__input form__input--2 mb--30"
                                                 placeholder="House number and street name">
-
-                                            <input type="text" name="billing_apartment" id="billing_apartment"
-                                                class="form__input form__input--2"
-                                                placeholder="Apartment, suite, unit etc. (optional)">
-                                        </div>
-                                    </div>
-                                    <div class="row mb--30">
-                                        <div class="form__group col-12">
-                                            <label for="billing_city" class="form__label form__label--2">Town / City
-                                                <span class="required">*</span></label>
-                                            <input type="text" name="billing_city" id="billing_city"
-                                                class="form__input form__input--2">
-                                        </div>
-                                    </div>
-                                    <div class="row mb--30">
-                                        <div class="form__group col-12">
-                                            <label for="billing_state" class="form__label form__label--2">State / County
-                                                <span class="required">*</span></label>
-                                            <input type="text" name="billing_state" id="billing_state"
-                                                class="form__input form__input--2">
                                         </div>
                                     </div>
                                     <div class="row mb--30">
                                         <div class="form__group col-12">
                                             <label for="billing_phone" class="form__label form__label--2">Phone <span
                                                     class="required">*</span></label>
-                                            <input type="text" name="billing_phone" id="billing_phone"
-                                                class="form__input form__input--2">
+                                                    <h3><?php echo $_SESSION['auth']['phonenumber']?></h3>
                                         </div>
                                     </div>
                                     <div class="row mb--30">
                                         <div class="form__group col-12">
                                             <label for="billing_email" class="form__label form__label--2">Email Address
                                                 <span class="required">*</span></label>
-                                            <input type="email" name="billing_email" id="billing_email"
-                                                class="form__input form__input--2">
+                                                <h3><?php echo $_SESSION['auth']['email']?></h3>
                                         </div>
                                     </div>
                                     
@@ -391,7 +345,7 @@ $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : ['cart'];
                                         </div>
                                     </div>
 
-                                <input type="submit" value="Thanh toán">
+                                    <button type="submit" class="btn btn-primary" style="" name="dathang">Đặt hàng</button>
                                 </form>
                             </div>
                         </div>
@@ -448,6 +402,30 @@ $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : ['cart'];
                                 
                             </div>
                         </div>
+                        <?php 
+                                   if(isset($_POST['dathang'])){
+                                       $idtk = $_SESSION['auth']['id'];
+                                       $address = $_POST['billing_streetAddress'];
+                                       $note = $_POST['orderNotes'];
+                                   
+                                       $stta = "đang xử lý";
+                                      
+                                       
+                                       $order  = $conn->query("INSERT INTO `order` (`order_id`, `user_id`, `order_price`, `addres`, `order_note`, `order_stt`, `time`) VALUES (NULL, '$idtk', '$tongtien', '$address', '$note', '$stta', current_timestamp());");
+                                        $idor = $conn->insert_id;
+                                        
+                                        foreach($cart as $key3){
+                                            $idpro = $key3['id'];
+                                            $qtt = $key3['quantity'];
+                                            $price = $key3['price'];
+                                            $cec  = $conn->query("INSERT INTO `order_detail` (`orderdt_id`, `order_id`, `pro_id`, `orderdt_qty`, `orderdt_price`) VALUES (NULL, '$idor', '$idpro', '$qtt', '$price');");
+                                            
+
+                                        }
+
+                                       
+                                   }
+                                ?>
                         <!-- Checkout Area End -->
                     </div>
                 </div>

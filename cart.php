@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once './db.php';
+
 $sql1 ="SELECT * FROM `users`";
 $kq1 = $conn->query($sql1);
 $sql = "SELECT * FROM `products`";
