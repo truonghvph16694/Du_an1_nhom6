@@ -697,7 +697,7 @@ if (isset($_SESSION['auth']) ):?>
         <!-- Side Navigation End -->
 
         <!-- Mini Cart Start -->
-        <aside class="mini-cart" id="miniCart">
+        <!-- <aside class="mini-cart" id="miniCart">
             <div class="mini-cart-wrapper">
                 <a href="#" class="btn-close"><i class="dl-icon-close"></i></a>
                 <div class="mini-cart-inner">
@@ -768,7 +768,7 @@ if (isset($_SESSION['auth']) ):?>
                     </div>
                 </div>
             </div>
-        </aside>
+        </aside> -->
         <!-- Mini Cart End -->
 
         <!-- Global Overlay Start -->

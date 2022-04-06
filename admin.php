@@ -77,8 +77,8 @@ if (isset($_SESSION['auth']) ):?>
 
     <!-- Main Wrapper Start -->
     <div class="wrapper">
-        <!-- Header Area Start -->
-        <header class="header header-fullwidth header-style-1">
+         <!-- Header Area Start -->
+         <header class="header header-fullwidth header-style-1">
             <div class="header-outer">
                 <div class="header-inner fixed-header">
                     <div class="container-fluid">
@@ -136,21 +136,19 @@ if (isset($_SESSION['auth']) ):?>
                             </div>
                             <div class="col-xl-5 col-lg-4 col-md-9 col-8">
                                 <ul class="header-toolbar text-end">
-                                    
+                                    <li class="header-toolbar__item d-none d-lg-block">
+                                        <a href="#sideNav" class="toolbar-btn">
+                                            <i class="dl-icon-menu2"></i>
+                                        </a>
+                                    </li>
                                     <li class="header-toolbar__item user-info-menu-btn">
                                         <a href="#">
                                             <i class="fa fa-user-circle-o"></i>
                                         </a>
                                         <ul class="user-info-menu">
                                             <li>
-                                                <a href="my-account.php">Tài khoản của tôi</a>
+                                                <a href="my-account.php">My Account</a>
                                             </li>
-                                            <?php 
-                                         if (isset($_SESSION['auth']) ) if( $_SESSION['auth']['role']==1):?> 
-                                             <li>
-                                                <a href="admin.php">Đăng nhập vào trang quản trị</a>
-                                            </li>
-                                         <?php endif?> 
                                             <li>
                                                 <a href="cart.php">Shopping Cart</a>
                                             </li>
@@ -158,20 +156,24 @@ if (isset($_SESSION['auth']) ):?>
                                                 <a href="checkout.php">Check Out</a>
                                             </li>
                                             <li>
-                                                <a href="logout.php">Đăng xuất</a>
+                                                <a href="#">Wishlist</a>
                                             </li>
-                                            
+                                            <li>
+                                                <a href="#">Order tracking</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">compare</a>
+                                            </li>
                                         </ul>
                                     </li>
                                     <li class="header-toolbar__item">
-                                        <a href="#miniCart" class="n">
-                                            <i class=""></i>
-                                            <sup class="mini-cart-count"></sup>
+                                        <a href="cart.php" class="">
+                                            <i class="dl-icon-cart4"></i>
                                         </a>
                                     </li>
                                     <li class="header-toolbar__item">
-                                        <a href="#searchForm" class="">
-                                            <i class=""></i>
+                                        <a href="#" class="search-btn toolbar-btn">
+                                            <i class="dl-icon-search1"></i>
                                         </a>
                                     </li>
                                     <li class="header-toolbar__item d-lg-none">

@@ -371,7 +371,7 @@ if(isset($_POST['content'])){
                                                 min="1">
                                         </div>
                                         <button type="button" class="btn btn-style-1 btn-large add-to-cart">
-                                        <a href="" class="btn btn-primary"> Mua ngay</a>
+                                        <a href="themgiohang.php?idsp=<?php echo $key['pro_id']?>" class="btn btn-primary"> Mua ngay</a>
                                         </button>
                                         <select class="form-select" aria-label="Default select example">
                                             <option selected>Chọn Size Sản Phẩm</option>
@@ -785,7 +785,7 @@ if(isset($_POST['content'])){
         <!-- Side Navigation End -->
 
         <!-- Mini Cart Start -->
-        <aside class="mini-cart" id="miniCart">
+        <!-- <aside class="mini-cart" id="miniCart">
             <div class="mini-cart-wrapper">
                 <a href="#" class="btn-close"><i class="dl-icon-close"></i></a>
                 <div class="mini-cart-inner">
@@ -856,7 +856,7 @@ if(isset($_POST['content'])){
                     </div>
                 </div>
             </div>
-        </aside>
+        </aside> -->
         <!-- Mini Cart End -->
 
         <!-- Global Overlay Start -->

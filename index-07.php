@@ -171,13 +171,12 @@ if (isset($_SESSION['auth']) )if( $_SESSION['auth']['role']==0):?>
                                             </li>
                                              
                                             <li class="header-toolbar__item">
-                                                <a href="#miniCart" class="mini-cart-btn toolbar-btn">
+                                                <a href="cart.php" class="mini-cart-btn toolbar-btn">
                                                     <i class="dl-icon-cart4"></i>
-                                                    <sup class="mini-cart-count">2</sup>
                                                 </a>
                                             </li>
                                             <li class="header-toolbar__item">
-                                                <a href="#searchForm" class="search-btn toolbar-btn">
+                                                <a href="#" class="search-btn toolbar-btn">
                                                     <i class="dl-icon-search1"></i>
                                                 </a>
                                             </li>
@@ -1160,7 +1159,7 @@ if (!isset($_SESSION['auth']) ):?>
         
 
         <!-- Mini Cart Start -->
-        <aside class="mini-cart" id="miniCart">
+        <!-- <aside class="mini-cart" id="miniCart">
             <div class="mini-cart-wrapper">
                 <a href="#" class="btn-close"><i class="dl-icon-close"></i></a>
                 <div class="mini-cart-inner">
@@ -1227,7 +1226,7 @@ if (!isset($_SESSION['auth']) ):?>
                     </div>
                 </div>
             </div>
-        </aside>
+        </aside> -->
         <!-- Mini Cart End -->
 
         <!-- Global Overlay Start -->
