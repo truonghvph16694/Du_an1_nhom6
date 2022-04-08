@@ -2,11 +2,51 @@
 session_start();
 require_once './db.php';
 
+
+
+                                  
+                            
+
 $sql1 ="SELECT * FROM `users`";
 $kq1 = $conn->query($sql1);
 $sql = "SELECT * FROM `products`";
 $kq = $conn->query($sql);
 $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : [];
+
+
+$tongtien = 0;
+foreach($cart as $key){ 
+    $tongtien += $key['price'] * $key['quantity'];
+}
+if(isset($_POST['dathang'])){
+    $idtk = $_SESSION['auth']['id'];
+    $address = $_POST['billing_streetAddress'];
+    $note = $_POST['orderNotes'];
+
+    $stta = "đang xử lý";
+
+    $err=[];
+        if(empty($address)){
+            $err['billing_streetAddress'] = 'Bạn chưa nhập địa chỉ giao hàng!!';
+        }
+    if(empty($err)){
+    $order  = $conn->query("INSERT INTO `order` (`order_id`, `user_id`, `order_price`, `addres`, `order_note`, `order_stt`, `time`) VALUES (NULL, '$idtk', '$tongtien', '$address', '$note', '$stta', current_timestamp());");
+    $idor = $conn->insert_id;
+    
+    foreach($cart as $key3){
+        $idpro = $key3['id'];
+        $qtt = $key3['quantity'];
+        $price = $key3['price'];
+        $order  = $conn->query("INSERT INTO `order_detail` (`orderdt_id`, `order_id`, `pro_id`, `orderdt_qty`, `orderdt_price`) VALUES (NULL, '$idor', '$idpro', '$qtt', '$price');");
+        
+    }
+    unset($_SESSION['cart']);
+    
+    header('location:index-07.php');die;
+}
+
+    
+}
 ?>
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -318,6 +358,7 @@ $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : [];
                                             <input type="text" name="billing_streetAddress" id="billing_streetAddress"
                                                 class="form__input form__input--2 mb--30"
                                                 placeholder="House number and street name">
+                                                <span><?php echo (isset($err['billing_streetAddress'])) ? $err['billing_streetAddress'] : ''?></span>
                                         </div>
                                     </div>
                                     <div class="row mb--30">
@@ -345,7 +386,7 @@ $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : [];
                                         </div>
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary" style="" name="dathang">Đặt hàng</button>
+                                    <button type="submit" class="btn btn-primary"  name="dathang">Đặt hàng</button>
                                 </form>
                             </div>
                         </div>
@@ -362,12 +403,6 @@ $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : [];
                                                 <th class="text-end">Total</th>
                                             </tr>
                                         </thead>
-                                        <?php 
-                                                    $tongtien = 0;
-                                                         foreach($cart as $key){ 
-                                                             $tongtien += $key['price'] * $key['quantity'];
-                                                         }
-                                                    ?>
                                                     <?php foreach($cart as $key1){ ?>
                                                     <tr>
                                         <tbody>
@@ -402,30 +437,7 @@ $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : [];
                                 
                             </div>
                         </div>
-                        <?php 
-                                   if(isset($_POST['dathang'])){
-                                       $idtk = $_SESSION['auth']['id'];
-                                       $address = $_POST['billing_streetAddress'];
-                                       $note = $_POST['orderNotes'];
-                                   
-                                       $stta = "đang xử lý";
-                                      
-                                       
-                                       $order  = $conn->query("INSERT INTO `order` (`order_id`, `user_id`, `order_price`, `addres`, `order_note`, `order_stt`, `time`) VALUES (NULL, '$idtk', '$tongtien', '$address', '$note', '$stta', current_timestamp());");
-                                        $idor = $conn->insert_id;
-                                        
-                                        foreach($cart as $key3){
-                                            $idpro = $key3['id'];
-                                            $qtt = $key3['quantity'];
-                                            $price = $key3['price'];
-                                            $cec  = $conn->query("INSERT INTO `order_detail` (`orderdt_id`, `order_id`, `pro_id`, `orderdt_qty`, `orderdt_price`) VALUES (NULL, '$idor', '$idpro', '$qtt', '$price');");
-                                            
-
-                                        }
-
-                                       
-                                   }
-                                ?>
+                        
                         <!-- Checkout Area End -->
                     </div>
                 </div>

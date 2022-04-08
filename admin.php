@@ -19,6 +19,12 @@ $users = $statement->fetchAll();
 
 <!doctype html>
 <html class="no-js" lang="zxx">
+<link rel="stylesheet" href="css/admin.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    
 <?php 
 if (isset($_SESSION['auth']) ):?> 
 
@@ -124,7 +130,7 @@ if (isset($_SESSION['auth']) ):?>
                             </div>
                             <div class="col-lg-2 col-md-3 col-4 text-lg-center">
                                 <!-- Logo Start Here -->
-                                <a href="index-2.html" class="logo-box">
+                                <a href="index-07.php" class="logo-box">
                                     <figure class="logo--normal">
                                         <img src="assets/img/logo/logo.svg" alt="Logo" />
                                     </figure>
@@ -136,49 +142,22 @@ if (isset($_SESSION['auth']) ):?>
                             </div>
                             <div class="col-xl-5 col-lg-4 col-md-9 col-8">
                                 <ul class="header-toolbar text-end">
-                                    <li class="header-toolbar__item d-none d-lg-block">
-                                        <a href="#sideNav" class="toolbar-btn">
-                                            <i class="dl-icon-menu2"></i>
-                                        </a>
-                                    </li>
+                                    
                                     <li class="header-toolbar__item user-info-menu-btn">
                                         <a href="#">
                                             <i class="fa fa-user-circle-o"></i>
                                         </a>
                                         <ul class="user-info-menu">
                                             <li>
-                                                <a href="my-account.php">My Account</a>
+                                                <a href="my-account.php">Tài khoản của tôi</a>
                                             </li>
                                             <li>
                                                 <a href="cart.php">Shopping Cart</a>
                                             </li>
-                                            <li>
-                                                <a href="checkout.php">Check Out</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Wishlist</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Order tracking</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">compare</a>
-                                            </li>
+                                            
                                         </ul>
                                     </li>
-                                    <li class="header-toolbar__item">
-                                        <a href="cart.php" class="">
-                                            <i class="dl-icon-cart4"></i>
-                                        </a>
-                                    </li>
-                                    <li class="header-toolbar__item">
-                                        <a href="#" class="search-btn toolbar-btn">
-                                            <i class="dl-icon-search1"></i>
-                                        </a>
-                                    </li>
-                                    <li class="header-toolbar__item d-lg-none">
-                                        <a href="#" class="menu-btn"></a>
-                                    </li>
+                                   
                                 </ul>
                             </div>
                         </div>
@@ -196,7 +175,7 @@ if (isset($_SESSION['auth']) ):?>
                     <div class="container-fluid">
                         <div class="row align-items-center">
                             <div class="col-4">
-                                <a href="index-2.html" class="logo-box">
+                                <a href="index-07.php" class="logo-box">
                                     <figure class="logo--normal">
                                         <img src="assets/img/logo/logo.svg" alt="Logo">
                                     </figure>
@@ -302,35 +281,37 @@ if (isset($_SESSION['auth']) ):?>
                                     aria-orientation="vertical">
                                     <a class="nav-link active" data-toggle="pill" role="tab" href="#dashboard"
                                         aria-controls="dashboard" aria-selected="true">Quản lý tài khoản</a>
-                                    
-                                  
+                                        <a class="nav-link" href="quanlycmt.php">Quản lý bình luận</a>
+                                        <a class="nav-link" href="quanlysp.php">Quản lý sản phẩm</a>
+                                        <a class="nav-link" href="quanlydonhang.php">Quản lý đơn hàng</a>
+                                        <a class="nav-link" href="quanlydanhmuc.php">Quản lý danh mục</a>
+                                        <a class="nav-link" href="logout.php">Đăng xuất</a>
                                   
                                 </div>
                                 <div class="user-dashboard-tab__content tab-content">
                                     <div class="tab-pane fade show active" id="dashboard">
-                                    <table>
+                                    <table class="table table-bordered border-primary table-dark">
     <thead>
         <th>Số ID</th>
-        <th>Tài Khoản</th>
-        <th>Mật khẩu</th>
+        <th>Tài khoản</th>
         <th>Tên đầy đủ</th>
         <th>Email</th>
         <th>Số điện thoại</th>
         <th>Vai trò</th>
+        <th>Tùy chọn</th>
     </thead>
     <tbody>
         <?php foreach ($users as $key => $value) : ?>
             <tr>
                 <td><?= $value['id'] ?></td>
                 <td><?= $value['username'] ?></td>
-                <td><?= $value['userpassword'] ?></td>
                 <td><?= $value['fullname'] ?></td>
                 <td><?= $value['email'] ?></td>
                 <td><?= $value['phonenumber'] ?></td>
                 <td><?= $value['role'] ?></td>
                 <td>
-                    
-                    <a onclick="return confirm('Bạn có muốn xóa không?')" href="xoa-users.php?id=<?= $value['id'] ?>">Xóa</a>
+                <a href="edit-user.php?id=<?= $value['id']?>">Sửa /</a>
+                    <a onclick="return confirm('Bạn có muốn xóa tài khoản này không?')" href="xoa-users.php?id=<?= $value['id'] ?>">Xóa</a>
                 </td>
                 
             </tr>
@@ -351,18 +332,7 @@ if (isset($_SESSION['auth']) ):?>
                     </div>
                    
             </div>
-            <div class="col-12">
-                            <div class="user-dashboard-tab flex-column flex-md-row">
-                                <div class="user-dashboard-tab__head nav flex-md-column" role="tablist"
-                                    aria-orientation="vertical">
-                                    <a class="nav-link active" data-toggle="pill" role="tab" href="#dashboard"
-                                        aria-controls="dashboard" aria-selected="true">Quản lý tài khoản</a>
-                                    
-                                  
-                                    <a class="nav-link" href="logout.php">Đăng xuất</a>
-                                </div>
-                                <div class="user-dashboard-tab__content tab-content">
-                                    <div class="tab-pane fade show active" id="dashboard">
+            
         </aside>
         <!-- Side Navigation End -->
 

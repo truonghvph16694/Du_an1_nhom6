@@ -23,7 +23,7 @@ $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : [];
     <link rel="apple-touch-icon" href="assets/img/icon.png">
 
     <!-- Title -->
-    <title>Airi - Clean, Minimal eCommerce Bootstrap 5 Template</title>
+    <title>Mua hàng</title>
 
     <!-- ************************* CSS Files ************************* -->
 
@@ -126,10 +126,7 @@ $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : [];
                             </div>
                             <div class="col-xl-5 col-lg-4 col-md-9 col-8">
                                 <ul class="header-toolbar text-end">
-                                    <li class="header-toolbar__item d-none d-lg-block">
-                                        <a href="#sideNav" class="toolbar-btn">
-                                            <i class="dl-icon-menu2"></i>
-                                        </a>
+                                    
                                     </li>
                                     <li class="header-toolbar__item user-info-menu-btn">
                                         <a href="#">
@@ -137,38 +134,18 @@ $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : [];
                                         </a>
                                         <ul class="user-info-menu">
                                             <li>
-                                                <a href="my-account.php">My Account</a>
+                                                <a href="my-account.php">Tài khoản của tôi</a>
                                             </li>
                                             <li>
                                                 <a href="cart.php">Shopping Cart</a>
                                             </li>
                                             <li>
-                                                <a href="checkout.php">Check Out</a>
+                                                <a href="logout.php">Đăng xuất</a>
                                             </li>
-                                            <li>
-                                                <a href="#">Wishlist</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Order tracking</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">compare</a>
-                                            </li>
+                                           
                                         </ul>
                                     </li>
-                                    <li class="header-toolbar__item">
-                                        <a href="cart.php" class="">
-                                            <i class="dl-icon-cart4"></i>
-                                        </a>
-                                    </li>
-                                    <li class="header-toolbar__item">
-                                        <a href="#" class="search-btn toolbar-btn">
-                                            <i class="dl-icon-search1"></i>
-                                        </a>
-                                    </li>
-                                    <li class="header-toolbar__item d-lg-none">
-                                        <a href="#" class="menu-btn"></a>
-                                    </li>
+                                 
                                 </ul>
                             </div>
                         </div>
@@ -330,6 +307,7 @@ $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : [];
                                                                 <span class="money"><?php echo $key1['price'] ?></span>
                                                             </span>
                                                         </td>
+                                                        
                                                         <td class="product-quantity">
                                                             <div class="">
                                                                 
@@ -514,7 +492,7 @@ $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : [];
                         <!-- Social Icons End Here -->
                     </div>
                     <div class="col-md-4 text-md-center">
-                        <p class="copyright-text">&copy; AIRI 2021 MADE WITH <i class="fa fa-heart"></i> BY HASTHEMES</p>
+                        <p class="copyright-text">&copy; Chào mừng đến với shop quần áo <i class="fa fa-heart"></i> của chúng tôi</p>
                     </div>
                     <div class="col-md-4 text-md-end">
                         <img src="assets/img/others/payments-2.png" alt="Payment">

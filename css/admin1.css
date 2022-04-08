@@ -1,0 +1,19 @@
+table, th, td{
+    border:3px solid #ccc;
+    
+}
+
+
+tr:hover{
+    background-color:#ddd;
+    cursor:pointer;
+    
+}
+table{
+    text-align: center;
+   
+    
+}
+table, th, td{
+    width: 20px;
+}
