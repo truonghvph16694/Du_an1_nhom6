@@ -333,9 +333,9 @@ if(isset($_POST['content'])){
                                     in stock
                                 </span>
                                 <div class="product-price-wrapper mb--40 mb-md--10">
-                                    <span class="money"><?= $key['pro_sale']?></span>
+                                    <span class="money"><?= number_format($key['pro_sale'])?></span>
                                     <span class="old-price">
-                                        <span class="money"><?= $key['pro_price']?></span>
+                                        <span class="money"><?=number_format($key['pro_price'])?></span>
                                     </span>
                                 </div>
                                 <div class="clearfix"></div>

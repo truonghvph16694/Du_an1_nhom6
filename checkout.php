@@ -1,11 +1,7 @@
 <?php
 session_start();
 require_once './db.php';
-
-
-
-                                  
-                            
+         
 
 $sql1 ="SELECT * FROM `users`";
 $kq1 = $conn->query($sql1);
@@ -42,7 +38,7 @@ if(isset($_POST['dathang'])){
     }
     unset($_SESSION['cart']);
     
-    header('location:index-07.php');die;
+    header('location:thongbao.php');die;
 }
 
     
@@ -410,14 +406,14 @@ if(isset($_POST['dathang'])){
                                                 <th><?php echo $key1['name'] ?>
                                                     <strong><span>&#10005;</span><?php echo $key1['quantity'] ?></strong>
                                                 </th>
-                                                <td class="text-end"><?php echo $key1['price'] * $key1['quantity'] ?></td>
+                                                <td class="text-end"><?php echo number_format($key1['price'] * $key1['quantity']) ?></td>
                                             </tr>
                                             <?php } ?>
                                         </tbody>
                                         <tfoot>
                                             <tr class="cart-subtotal">
                                                 <th>Subtotal</th>
-                                                <td class="text-end"><?php echo $tongtien ?></td>
+                                                <td class="text-end"><?php echo number_format($tongtien)?></td>
                                             </tr>
 
                                             <tr class="shipping">
@@ -428,7 +424,7 @@ if(isset($_POST['dathang'])){
                                             </tr>
                                             <tr class="order-total">
                                                 <th>Order Total</th>
-                                                <td class="text-end"><span class="order-total-ammount"><?php echo $tongtien + 35000?></span>
+                                                <td class="text-end"><span class="order-total-ammount"><?php echo number_format($tongtien + 35000)?></span>
                                                 </td>
                                             </tr>
                                         </tfoot>
