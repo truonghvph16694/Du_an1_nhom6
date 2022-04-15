@@ -245,7 +245,7 @@ $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : [];
         <!-- Mobile Header area End -->
 
        <div class="thongbao">
-       <p class="text-center fs-1">Bạn đã đặt Hàng thành công</p>
+       <p class="text-center fs-1 fw-bolder">Bạn đã đặt hàng thành công</p>
        <p class="text-muted text-center fs-2">
                 Kiểm tra trạng thái <a href="my-account.php" class="text-reset">Đơn hàng</a>.
                 </p>
