@@ -1,8 +1,20 @@
 <?php
 session_start();
+require_once './db2.php';
+if(!isset($_SESSION['auth']) || $_SESSION['auth'] == null){
+    header('location: formdangnhap.php');die;}
+    $id = $_SESSION['auth']['id'];
+$sql = "SELECT * FROM `order` WHERE `user_id`= $id";
+$stmt = $connect->prepare($sql);
+$stmt->execute();
+$user = $stmt->fetchAll();
+
+
+
 ?>
 <!doctype html>
 <html class="no-js" lang="zxx">
+<link rel="stylesheet" href="css/admin.css">
 <?php 
 if (isset($_SESSION['auth']) ):?> 
 
@@ -108,7 +120,7 @@ if (isset($_SESSION['auth']) ):?>
                             </div>
                             <div class="col-lg-2 col-md-3 col-4 text-lg-center">
                                 <!-- Logo Start Here -->
-                                <a href="index-2.html" class="logo-box">
+                                <a href="index-07.php" class="logo-box">
                                     <figure class="logo--normal">
                                         <img src="assets/img/logo/logo.svg" alt="Logo" />
                                     </figure>
@@ -120,11 +132,7 @@ if (isset($_SESSION['auth']) ):?>
                             </div>
                             <div class="col-xl-5 col-lg-4 col-md-9 col-8">
                                 <ul class="header-toolbar text-end">
-                                    <li class="header-toolbar__item d-none d-lg-block">
-                                        <a href="#sideNav" class="toolbar-btn">
-                                            <i class="dl-icon-menu2"></i>
-                                        </a>
-                                    </li>
+                                    
                                     <li class="header-toolbar__item user-info-menu-btn">
                                         <a href="#">
                                             <i class="fa fa-user-circle-o"></i>
@@ -136,35 +144,20 @@ if (isset($_SESSION['auth']) ):?>
                                             <?php 
                                          if (isset($_SESSION['auth']) ) if( $_SESSION['auth']['role']==1):?> 
                                              <li>
-                                                <a href="admin.php">Đăng nhập vào trang quản trị</a>
+                                                <a href="admin.php">Quản trị</a>
                                             </li>
                                          <?php endif?> 
                                             <li>
                                                 <a href="cart.php">Shopping Cart</a>
                                             </li>
-                                            <li>
-                                                <a href="checkout.php">Check Out</a>
-                                            </li>
+                                            
                                             <li>
                                                 <a href="logout.php">Đăng xuất</a>
                                             </li>
                                             
                                         </ul>
                                     </li>
-                                    <li class="header-toolbar__item">
-                                        <a href="#miniCart" class="mini-cart-btn toolbar-btn">
-                                            <i class="dl-icon-cart4"></i>
-                                            <sup class="mini-cart-count">2</sup>
-                                        </a>
-                                    </li>
-                                    <li class="header-toolbar__item">
-                                        <a href="#searchForm" class="search-btn toolbar-btn">
-                                            <i class="dl-icon-search1"></i>
-                                        </a>
-                                    </li>
-                                    <li class="header-toolbar__item d-lg-none">
-                                        <a href="#" class="menu-btn"></a>
-                                    </li>
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -182,7 +175,7 @@ if (isset($_SESSION['auth']) ):?>
                     <div class="container-fluid">
                         <div class="row align-items-center">
                             <div class="col-4">
-                                <a href="index-2.html" class="logo-box">
+                                <a href="index-07.php" class="logo-box">
                                     <figure class="logo--normal">
                                         <img src="assets/img/logo/logo.svg" alt="Logo">
                                     </figure>
@@ -190,25 +183,8 @@ if (isset($_SESSION['auth']) ):?>
                             </div>
                             <div class="col-8">
                                 <ul class="header-toolbar text-end">
-                                    <li class="header-toolbar__item user-info-menu-btn">
-                                        <a href="#">
-                                            <i class="fa fa-user-circle-o"></i>
-                                        </a>
-                                    </li>
-                                    <li class="header-toolbar__item">
-                                        <a href="#miniCart" class="mini-cart-btn toolbar-btn">
-                                            <i class="dl-icon-cart4"></i>
-                                            <sup class="mini-cart-count">2</sup>
-                                        </a>
-                                    </li>
-                                    <li class="header-toolbar__item">
-                                        <a href="#searchForm" class="search-btn toolbar-btn">
-                                            <i class="dl-icon-search1"></i>
-                                        </a>
-                                    </li>
-                                    <li class="header-toolbar__item d-lg-none">
-                                        <a href="#" class="menu-btn"></a>
-                                    </li>
+                                   
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -289,16 +265,45 @@ if (isset($_SESSION['auth']) ):?>
                                     <a class="nav-link active" data-toggle="pill" role="tab" href="#dashboard"
                                         aria-controls="dashboard" aria-selected="true">Thông tin tài khoản của tôi</a>
                                     
-                                  
+                                        
                                     <a class="nav-link" href="logout.php">Đăng xuất</a>
                                 </div>
                                 <div class="user-dashboard-tab__content tab-content">
                                     <div class="tab-pane fade show active" id="dashboard">
-                                        <p>Tên đăng nhập: <?=$_SESSION['auth']['username']?></p>
-                                        <p>Số điện thoại: <?=$_SESSION['auth']['phonenumber']?></p>
-                                        <p>Email: <?=$_SESSION['auth']['email']?></p>
-                                        <p>Tên đầy đủ: <?=$_SESSION['auth']['fullname']?></p>
-                                        
+                                        <h3>Tên đăng nhập: <?=$_SESSION['auth']['username']?></h3>
+                                        <h3>Số điện thoại: <?=$_SESSION['auth']['phonenumber']?></h3> 
+                                        <h3>Email: <?=$_SESSION['auth']['email']?></h3> 
+                                        <h3>Tên đầy đủ: <?=$_SESSION['auth']['fullname']?></h3> <br>
+                                         <h1>Đơn đã mua:</h1>
+                                        <table class="table table-bordered border-primary table-dark">
+    <thead>
+        <th>ID đơn hàng</th>
+        <th>Tổng tiền sản phẩm</th>
+        <th>Địa chỉ</th>
+        <th>Ghi chú cho shop</th>
+        <th>Trạng thái đơn hàng</th>
+        <th>Thời gian đặt hàng</th>
+        
+    </thead>
+    <tbody>
+    <?php foreach ($user as $key => $value) : ?>
+            <tr>
+            <td><?= $value['order_id'] ?></td>
+               
+                <td><?= $value['order_price'] ?></td>
+                <td><?= $value['addres'] ?></td>
+                <td><?= $value['order_note'] ?></td>
+                <td><?= $value['order_stt'] ?></td>
+                <td><?= $value['time'] ?></td>
+                
+                
+            </tr>
+            
+            <?php endforeach ?>
+    </tbody>
+</table>
+
+        
                                     </div>
                                     <div class="tab-pane fade" id="orders">
                                         <div class="message-box mb--30 d-none">
@@ -493,7 +498,7 @@ if (isset($_SESSION['auth']) ):?>
                     <div class="col-12 text-md-center">
                         <div class="footer-widget">
                             <div class="textwidget">
-                                <a href="index-2.html" class="footer-logo">
+                                <a href="index-07.php" class="footer-logo">
                                     <img src="assets/img/logo/logo.svg" alt="Logo">
                                 </a>
                             </div>

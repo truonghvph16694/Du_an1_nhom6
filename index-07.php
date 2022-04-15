@@ -133,7 +133,7 @@ if (isset($_SESSION['auth']) )if( $_SESSION['auth']['role']==0):?>
                                     <!-- Contact Info End Here -->
                                 </div>
                                 <div class="col-xl-4 col-lg-2 col-4 text-lg-center">
-                                    <a href="index-2.html" class="logo-box">
+                                    <a href="index-07.php" class="logo-box">
                                         <figure class="logo--normal">
                                             <img src="assets/img/logo/logo.svg" alt="logo">
                                         </figure>
@@ -143,11 +143,7 @@ if (isset($_SESSION['auth']) )if( $_SESSION['auth']['role']==0):?>
                                     <div class="header-middle-right">
                                         
                                         <ul class="header-toolbar text-end">
-                                            <li class="header-toolbar__item d-none d-lg-block">
-                                                <a href="#sideNav" class="toolbar-btn">
-                                                    <i class="dl-icon-menu2"></i>
-                                                </a>                                    
-                                            </li>
+                                         
                                             <li class="header-toolbar__item user-info-menu-btn">
                                                 <a href="#">
                                                     <i class="fa fa-user-circle-o"></i>
@@ -161,28 +157,16 @@ if (isset($_SESSION['auth']) )if( $_SESSION['auth']['role']==0):?>
                                                     <li>
                                                         <a href="cart.php">Shopping Cart</a>
                                                     </li>
-                                                    <li>
-                                                        <a href="checkout.php">Check Out</a>
-                                                    </li>
+                                                   
                                                     <li>
                                                 <a href="logout.php">Đăng xuất</a>
                                             </li>
                                                 </ul>
                                             </li>
                                              
-                                            <li class="header-toolbar__item">
-                                                <a href="cart.php" class="mini-cart-btn toolbar-btn">
-                                                    <i class="dl-icon-cart4"></i>
-                                                </a>
-                                            </li>
-                                            <li class="header-toolbar__item">
-                                                <a href="#" class="search-btn toolbar-btn">
-                                                    <i class="dl-icon-search1"></i>
-                                                </a>
-                                            </li>
-                                            <li class="header-toolbar__item d-lg-none">
-                                                <a href="#" class="menu-btn"></a>                 
-                                            </li>
+                                            
+                                           
+                                            
                                         </ul>
                                     </div>
                                 </div>
@@ -304,7 +288,7 @@ if (isset($_SESSION['auth']) ) if( $_SESSION['auth']['role']==1):?>
                                     <!-- Contact Info End Here -->
                                 </div>
                                 <div class="col-xl-4 col-lg-2 col-4 text-lg-center">
-                                    <a href="index-2.html" class="logo-box">
+                                    <a href="index-07.php" class="logo-box">
                                         <figure class="logo--normal">
                                             <img src="assets/img/logo/logo.svg" alt="logo">
                                         </figure>
@@ -314,11 +298,7 @@ if (isset($_SESSION['auth']) ) if( $_SESSION['auth']['role']==1):?>
                                     <div class="header-middle-right">
                                         
                                         <ul class="header-toolbar text-end">
-                                            <li class="header-toolbar__item d-none d-lg-block">
-                                                <a href="#sideNav" class="toolbar-btn">
-                                                    <i class="dl-icon-menu2"></i>
-                                                </a>                                    
-                                            </li>
+                                         
                                             <li class="header-toolbar__item user-info-menu-btn">
                                                 <a href="#">
                                                     <i class="fa fa-user-circle-o"></i>
@@ -330,35 +310,21 @@ if (isset($_SESSION['auth']) ) if( $_SESSION['auth']['role']==1):?>
                                                     </li>
 
                                                     <li>
-                                                        <a href="admin.php">Đăng nhập trang quản trị</a>
+                                                        <a href="admin.php">Quản trị</a>
                                                     </li>
                                                     
                                                     <li>
                                                         <a href="cart.php">Shopping Cart</a>
                                                     </li>
-                                                    <li>
-                                                        <a href="checkout.php">Check Out</a>
-                                                    </li>
+                                                   
                                                     <li>
                                                 <a href="logout.php">Đăng xuất</a>
                                             </li>
                                                 </ul>
                                             </li>
                                              
-                                            <li class="header-toolbar__item">
-                                                <a href="#miniCart" class="mini-cart-btn toolbar-btn">
-                                                    <i class="dl-icon-cart4"></i>
-                                                    <sup class="mini-cart-count">2</sup>
-                                                </a>
-                                            </li>
-                                            <li class="header-toolbar__item">
-                                                <a href="#searchForm" class="search-btn toolbar-btn">
-                                                    <i class="dl-icon-search1"></i>
-                                                </a>
-                                            </li>
-                                            <li class="header-toolbar__item d-lg-none">
-                                                <a href="#" class="menu-btn"></a>                 
-                                            </li>
+                                            
+                                           
                                         </ul>
                                     </div>
                                 </div>
@@ -478,7 +444,7 @@ if (!isset($_SESSION['auth']) ):?>
                                     <!-- Contact Info End Here -->
                                 </div>
                                 <div class="col-xl-4 col-lg-2 col-4 text-lg-center">
-                                    <a href="index-2.html" class="logo-box">
+                                    <a href="index-07.php" class="logo-box">
                                         <figure class="logo--normal">
                                             <img src="assets/img/logo/logo.svg" alt="logo">
                                         </figure>
@@ -488,11 +454,7 @@ if (!isset($_SESSION['auth']) ):?>
                                     <div class="header-middle-right">
                                         
                                         <ul class="header-toolbar text-end">
-                                            <li class="header-toolbar__item d-none d-lg-block">
-                                                <a href="#sideNav" class="toolbar-btn">
-                                                    <i class="dl-icon-menu2"></i>
-                                                </a>                                    
-                                            </li>
+                                          
                                             <li class="header-toolbar__item user-info-menu-btn">
                                                 <a href="#">
                                                     <i class="fa fa-user-circle-o"></i>
@@ -509,26 +471,12 @@ if (!isset($_SESSION['auth']) ):?>
                                                     <li>
                                                         <a href="cart.php">Shopping Cart</a>
                                                     </li>
-                                                    <li>
-                                                        <a href="checkout.php">Check Out</a>
-                                                    </li>
+                                                
                                                 </ul>
                                             </li>
                                              
-                                            <li class="header-toolbar__item">
-                                                <a href="#miniCart" class="mini-cart-btn toolbar-btn">
-                                                    <i class="dl-icon-cart4"></i>
-                                                    <sup class="mini-cart-count">2</sup>
-                                                </a>
-                                            </li>
-                                            <li class="header-toolbar__item">
-                                                <a href="#searchForm" class="search-btn toolbar-btn">
-                                                    <i class="dl-icon-search1"></i>
-                                                </a>
-                                            </li>
-                                            <li class="header-toolbar__item d-lg-none">
-                                                <a href="#" class="menu-btn"></a>                 
-                                            </li>
+                                          
+                                          
                                         </ul>
                                     </div>
                                 </div>
@@ -594,7 +542,7 @@ if (!isset($_SESSION['auth']) ):?>
                     <div class="container-fluid">
                         <div class="row align-items-center">
                             <div class="col-4">
-                                <a href="index-2.html" class="logo-box">
+                                <a href="index-07.php" class="logo-box">
                                     <figure class="logo--normal">
                                         <img src="assets/img/logo/logo.svg" alt="Logo">
                                     </figure>
@@ -642,7 +590,7 @@ if (!isset($_SESSION['auth']) ):?>
                                     <button class="dl-trigger">Open Menu</button>
                                     <ul class="dl-menu">
                                         <li>
-                                            <a href="index-2.php">
+                                            <a href="index-07.php">
                                                 Home
                                             </a>
                                         </li>

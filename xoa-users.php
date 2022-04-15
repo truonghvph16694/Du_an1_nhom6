@@ -1,6 +1,6 @@
 <?php
 include './db2.php';
-include("./quanly-users.php"); 
+
 session_start();
 
 if(isset($_GET['id'])){

@@ -29,7 +29,7 @@ $kq1 = $conn->query($sql1);
 //bình luận
 if(isset($_POST['content'])){
     $content=$_POST['content'];
-     $idsanpham=$_GET['iddetail'];
+    $idsanpham=$_GET['iddetail'];
     $idtk = $_SESSION['auth']['id'];
     $cmtadd = $conn->query("INSERT INTO  comments(user_id ,pro_id ,cmt_content) VALUES('$idtk','$idsanpham','$content')");
 
@@ -58,7 +58,7 @@ if(isset($_POST['content'])){
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <!-- Title -->
-    <title>Airi - Clean, Minimal eCommerce Bootstrap 5 Template</title>
+    <title>Thông tin sản phẩm</title>
 
     <!-- ************************* CSS Files ************************* -->
 
@@ -134,9 +134,7 @@ if(isset($_POST['content'])){
                                             </a>
                                         </li>
                                         <li class="mainmenu__item">
-                                            <a href="login-register.php" class="mainmenu__link">
-                                                <span class="mm-text">login-register</span>
-                                            </a>
+                                            
                                         </li>
                                     </ul>
                                 </nav>
@@ -157,9 +155,7 @@ if(isset($_POST['content'])){
                             <div class="col-xl-5 col-lg-4 col-md-9 col-8">
                                 <ul class="header-toolbar text-end">
                                     <li class="header-toolbar__item d-none d-lg-block">
-                                        <a href="#sideNav" class="toolbar-btn">
-                                            <i class="dl-icon-menu2"></i>
-                                        </a>
+                                       
                                     </li>
                                     <li class="header-toolbar__item user-info-menu-btn">
                                         <a href="#">
@@ -167,39 +163,19 @@ if(isset($_POST['content'])){
                                         </a>
                                         <ul class="user-info-menu">
                                             <li>
-                                                <a href="my-account.php">My Account</a>
+                                                <a href="my-account.php">Tài khoản của tôi</a>
                                             </li>
                                             <li>
                                                 <a href="cart.php">Shopping Cart</a>
                                             </li>
-                                            <li>
-                                                <a href="checkout.php">Check Out</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Wishlist</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Order tracking</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">compare</a>
-                                            </li>
+                                            
+                                           
+                                    
                                         </ul>
                                     </li>
-                                    <li class="header-toolbar__item">
-                                        <a href="#miniCart" class="mini-cart-btn toolbar-btn">
-                                            <i class="dl-icon-cart4"></i>
-                                            <sup class="mini-cart-count">2</sup>
-                                        </a>
-                                    </li>
-                                    <li class="header-toolbar__item">
-                                        <a href="#searchForm" class="search-btn toolbar-btn">
-                                            <i class="dl-icon-search1"></i>
-                                        </a>
-                                    </li>
-                                    <li class="header-toolbar__item d-lg-none">
-                                        <a href="#" class="menu-btn"></a>
-                                    </li>
+                                    
+                                   
+                                   
                                 </ul>
                             </div>
                         </div>
@@ -324,7 +300,7 @@ if(isset($_POST['content'])){
                                             <div class="product-gallery__wrapper">
                                                 <div class="airi-element-carousel main-slider product-gallery__full-image image-popup">
                                                     <figure class="product-gallery__image zoom">
-                                                        <img src="assets/img/products/<?= $key['pro_image']?>" alt="Product">
+                                                        <img src="uploads/<?= $key['pro_image']?>" alt="Product">
                                                     </figure>
                                                 </div>
                                             </div>
@@ -357,9 +333,9 @@ if(isset($_POST['content'])){
                                     in stock
                                 </span>
                                 <div class="product-price-wrapper mb--40 mb-md--10">
-                                    <span class="money"><?= $key['pro_sale']?></span>
+                                    <span class="money"><?= number_format($key['pro_sale'])?></span>
                                     <span class="old-price">
-                                        <span class="money"><?= $key['pro_price']?></span>
+                                        <span class="money"><?=number_format($key['pro_price'])?></span>
                                     </span>
                                 </div>
                                 <div class="clearfix"></div>
@@ -371,7 +347,7 @@ if(isset($_POST['content'])){
                                                 min="1">
                                         </div>
                                         <button type="button" class="btn btn-style-1 btn-large add-to-cart">
-                                        <a href="themgiohang.php?idsp=<?php echo $key['pro_id']?>" class="btn btn-primary"> Mua ngay</a>
+                                        <a href="themgiohang.php?idsp=<?php echo $key['pro_id']?>" class="btn btn-primary">Mua</a>
                                         </button>
                                         <select class="form-select" aria-label="Default select example">
                                             <option selected>Chọn Size Sản Phẩm</option>
@@ -501,6 +477,7 @@ if(isset($_POST['content'])){
                                                 <?php
                                                     if(isset($_SESSION['auth'])){
                                                         ?>
+                                                        <form role="form" method="POST"  class="form">
                                                         <div class="form-group">
                                                         <input name="content" class="form-control" type="text" placeholder="Mời bạn nhập bình luận" />
                                                     </div>
@@ -508,18 +485,13 @@ if(isset($_POST['content'])){
                                                     <input type="submit" value="Submit"
                                                                     class="btn btn-style-1 btn-submit">
                                                     </div>
+                                                </form>
                                                         <?php }
                                                         else{        
                                                     ?>
                                                     <h3><a href="formdangnhap.php">Bạn phải Đăng nhập thì mới có thể Bình Luận</a></h3>
                                                     <?php   } ?>
-                                                <form role="form" method="POST"  class="form">
-
-
-
-
                                                 
-                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -547,7 +519,7 @@ if(isset($_POST['content'])){
                                                 <div class="airi-product">
                                                     <div class="product-inner">
                                                                 <a href="product-details.php?iddetail=<?= $key['pro_id']?>&iddanh=<?= $key['cate_id']?>">
-                                                                    <img src="assets/img/products/<?= $key['pro_image']?>" alt="Product Image" class="">
+                                                                    <img src="uploads/<?= $key['pro_image']?>" alt="Product Image" class="">
                                                                 </a>
                                                         <div class="product-info">
                                                             <h3 class="product-title">
