@@ -1,23 +1,34 @@
 <?php
 session_start();
 require_once './db.php';
-         
+
 
 $sql1 ="SELECT * FROM `users`";
 $kq1 = $conn->query($sql1);
 $sql = "SELECT * FROM `products`";
 $kq = $conn->query($sql);
 $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : [];
-
-
 $tongtien = 0;
-foreach($cart as $key){ 
-    $tongtien += $key['price'] * $key['quantity'];
-}
+     foreach($cart as $key){ 
+        $tongtien += $key['price'] * $key['quantity'];
+     }
+       
+     if(isset($_POST['sale'])){
+        $sale = $_POST['coupon'];
+         $sql_sale = "SELECT * FROM `ma_sale` where `name` LIKE '$sale'";
+         $kq_sale = $conn->query($sql_sale);
+         foreach($kq_sale as $key2){ 
+             $tongtien1 = $tongtien - $key2['sale_price'];
+         }
+        }else{
+            $tongtien1 = $tongtien;
+         }
+         
 if(isset($_POST['dathang'])){
     $idtk = $_SESSION['auth']['id'];
     $address = $_POST['billing_streetAddress'];
     $note = $_POST['orderNotes'];
+    $tongtien1 = $_POST['tongtien'];
 
     $stta = "đang xử lý";
 
@@ -26,7 +37,7 @@ if(isset($_POST['dathang'])){
             $err['billing_streetAddress'] = 'Bạn chưa nhập địa chỉ giao hàng!!';
         }
     if(empty($err)){
-    $order  = $conn->query("INSERT INTO `order` (`order_id`, `user_id`, `order_price`, `addres`, `order_note`, `order_stt`, `time`) VALUES (NULL, '$idtk', '$tongtien', '$address', '$note', '$stta', current_timestamp());");
+    $order  = $conn->query("INSERT INTO `order` (`order_id`, `user_id`, `order_price`, `addres`, `order_note`, `order_stt`, `time`) VALUES (NULL, '$idtk', '$tongtien1', '$address', '$note', '$stta', current_timestamp());");
     $idor = $conn->insert_id;
     
     foreach($cart as $key3){
@@ -39,10 +50,16 @@ if(isset($_POST['dathang'])){
     unset($_SESSION['cart']);
     
     header('location:thongbao.php');die;
+    
 }
 
     
 }
+
+                                  
+                            
+
+
 ?>
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -381,8 +398,18 @@ if(isset($_POST['dathang'])){
                                                 placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                                         </div>
                                     </div>
+                                    <div class="row g-0 border-top pt--20 mt--20">
+                                    <div class="col-sm-6">
+                                    <input type="text" id="coupon" name="coupon" class="cart-form__input"
+                                                placeholder="Coupon Code">
+                                    <button type="submit" name="sale" value="sale" class="cart-form__btn">sale</button> 
+                                    </div>
+                                    
+                                </div>
+                                    <input type="hidden" name="tongtien" value="<?= $tongtien1??''?>">
 
-                                    <button type="submit" class="btn btn-primary"  name="dathang">Đặt hàng</button>
+                                    <button type="submit" class="btn btn-primary" style="" name="dathang">Đặt hàng</button>
+
                                 </form>
                             </div>
                         </div>
@@ -399,6 +426,7 @@ if(isset($_POST['dathang'])){
                                                 <th class="text-end">Total</th>
                                             </tr>
                                         </thead>
+                                        
                                                     <?php foreach($cart as $key1){ ?>
                                                     <tr>
                                         <tbody>
@@ -406,14 +434,14 @@ if(isset($_POST['dathang'])){
                                                 <th><?php echo $key1['name'] ?>
                                                     <strong><span>&#10005;</span><?php echo $key1['quantity'] ?></strong>
                                                 </th>
-                                                <td class="text-end"><?php echo number_format($key1['price'] * $key1['quantity']) ?></td>
+                                                <td class="text-end"><?php echo $key1['price'] * $key1['quantity'] ?></td>
                                             </tr>
                                             <?php } ?>
                                         </tbody>
                                         <tfoot>
                                             <tr class="cart-subtotal">
                                                 <th>Subtotal</th>
-                                                <td class="text-end"><?php echo number_format($tongtien)?></td>
+                                                <td class="text-end"><?php echo $tongtien1 ?></td>
                                             </tr>
 
                                             <tr class="shipping">
@@ -424,7 +452,7 @@ if(isset($_POST['dathang'])){
                                             </tr>
                                             <tr class="order-total">
                                                 <th>Order Total</th>
-                                                <td class="text-end"><span class="order-total-ammount"><?php echo number_format($tongtien + 35000)?></span>
+                                                <td class="text-end"><span class="order-total-ammount"><?php echo $tongtien1 + 35000?></span>
                                                 </td>
                                             </tr>
                                         </tfoot>
