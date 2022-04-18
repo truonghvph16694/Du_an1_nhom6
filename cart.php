@@ -328,16 +328,6 @@ $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : [];
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row g-0 border-top pt--20 mt--20">
-                                    <div class="col-sm-6">
-                                        <div class="coupon">
-                                            <input type="text" id="coupon" name="coupon" class="cart-form__input"
-                                                placeholder="Coupon Code">
-                                            <button type="submit" class="cart-form__btn">Apply Coupon</button>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
                             </form>
                         </div>
                         <div class="col-lg-4">
