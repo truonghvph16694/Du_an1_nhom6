@@ -37,7 +37,7 @@ if(isset($_POST['dathang'])){
             $err['billing_streetAddress'] = 'Bạn chưa nhập địa chỉ giao hàng!!';
         }
     if(empty($err)){
-    $order  = $conn->query("INSERT INTO `order` (`order_id`, `user_id`, `order_price`, `addres`, `order_note`, `order_stt`, `time`) VALUES (NULL, '$idtk', '$tongtien1', '$address', '$note', '$stta', current_timestamp());");
+    $order  = $conn->query("INSERT INTO `order` (`order_id`, `user_id`, `order_price`, `addres`, `order_note`, `order_stt`, `time`) VALUES (NULL, '$idtk', '$tongtien1'+ 35000, '$address', '$note', '$stta', current_timestamp());");
     $idor = $conn->insert_id;
     
     foreach($cart as $key3){
